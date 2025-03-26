@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace QuanLyBanHang
 {
-    class Ducloi
+    class DucLoi
     {
     }
 }
