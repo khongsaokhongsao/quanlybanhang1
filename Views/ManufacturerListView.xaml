@@ -15,6 +15,25 @@
                 <DataGridTextColumn Header="Tên" Binding="{Binding Name}" Width="*"/>
                 <DataGridTextColumn Header="Địa chỉ" Binding="{Binding Address}" Width="*"/>
                 <DataGridTextColumn Header="SĐT" Binding="{Binding Phone}" Width="Auto"/>
+
+                <DataGridTemplateColumn Header="Hành động" Width="150">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                <!-- Nút Sửa (Màu Xanh) -->
+                                <Button Content="✍️Sửa" Command="{Binding DataContext.EditProductCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" 
+        CommandParameter="{Binding}" Margin="5,0" Padding="5"
+        Background="Green" Foreground="White"/>
+
+                                <!-- Nút Xóa (Màu Đỏ) -->
+                                <Button Content="🗑️Xóa" Command="{Binding DataContext.DeleteProductCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" 
+        CommandParameter="{Binding}" Margin="5,0" Padding="5"
+        Background="Red" Foreground="White"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                
             </DataGrid.Columns>
         </DataGrid>
     </Grid>
