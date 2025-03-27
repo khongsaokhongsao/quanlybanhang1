@@ -43,6 +43,9 @@ namespace QuanLyBanHang.ViewModels
 
         private ProductManagementView _productManagementView;
         private ProductManagementViewModel _productManagementViewModel;
+        private ManufacturerListView _manufacturerListView;
+        private ManufacturerListViewModel _manufacturerListViewModel;
+
 
         public MainViewModel()
         {
@@ -59,6 +62,7 @@ namespace QuanLyBanHang.ViewModels
             ShowProductListCommand = new RelayCommand(ShowProductList);
             AddProductCommand = new RelayCommand(AddProduct);
             ShowManufacturerListCommand = new RelayCommand(ShowManufacturerList);
+
             ShowCategoryListCommand = new RelayCommand(ShowCategoryList);
             ShowProductListForManagementCommand = new RelayCommand(ShowProductListForManagement);
             AddProductForManagementCommand = new RelayCommand(AddProductForManagement);
@@ -120,9 +124,18 @@ namespace QuanLyBanHang.ViewModels
 
         private void ShowManufacturerList(object obj)
         {
-            // Chức năng này cần InventoryManagementView
-            throw new NotImplementedException("Chức năng Quản lý nhập hàng chưa được triển khai.");
+            if (_manufacturerListView == null)
+            {
+                _manufacturerListViewModel = new ManufacturerListViewModel();
+                _manufacturerListView = new ManufacturerListView
+                {
+                    DataContext = _manufacturerListViewModel
+                };
+            }
+
+            CurrentView = _manufacturerListView;
         }
+
 
         private void ShowCategoryList(object obj)
         {

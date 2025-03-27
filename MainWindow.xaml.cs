@@ -9,6 +9,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using QuanLyBanHang.ViewModels;
+using QuanLyBanHang.Views;
 
 
 namespace QuanLyBanHang
@@ -103,6 +104,8 @@ namespace QuanLyBanHang
                 ? Visibility.Collapsed
                 : Visibility.Visible;
         }
+        private ManufacturerListView _manufacturerListView;
+        private ManufacturerListViewModel _manufacturerListViewModel;
 
     }
 }

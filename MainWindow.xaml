@@ -89,9 +89,10 @@
                                 Command="{Binding ShowProductListForManagementCommand}"/>
                         <Button Content="➕Thêm sản phẩm" Style="{StaticResource MenuButtonStyle}" FontSize="14"
                                 Command="{Binding AddProductForManagementCommand}"/>
-                        <Button Content="❌Xóa sản phẩm" Style="{StaticResource MenuButtonStyle}" FontSize="14"/>
-                        <Button Content="🔄Cập nhật sản phẩm" Style="{StaticResource MenuButtonStyle}" FontSize="14"/>
-                        <Button Content="📜Danh sách nhà sản xuất" Style="{StaticResource MenuButtonStyle}" FontSize="14"/>
+                        
+                        <Button Content=" 📜Danh sách nhà sản xuất" Style ="{StaticResource MenuButtonStyle}" FontSize="14"
+                                Command="{Binding ShowManufacturerListCommand}" Margin="5"/>
+
                         <Button Content="🔄Thêm nhà sản xuất" Style="{StaticResource MenuButtonStyle}" FontSize="14"/>
                         <Button Content="🗂️Quản lý loại sản phẩm" Style="{StaticResource MenuButtonStyle}" FontSize="14"/>
                         <Button Content="🔍Tìm kiếm sản phẩm" Style="{StaticResource MenuButtonStyle}" FontSize="14"/>
