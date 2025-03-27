@@ -28,6 +28,26 @@
                 <DataGridTextColumn Header="Giá bán" Binding="{Binding Price}" Width="100"/>
                 <DataGridTextColumn Header="Tồn kho" Binding="{Binding Stock}" Width="100"/>
                 <DataGridTextColumn Header="Trạng thái" Binding="{Binding IsActive, Converter={StaticResource BooleanToActiveStatusConverter}}" Width="100"/>
+
+                <DataGridTemplateColumn Header="Hành động" Width="150">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                <!-- Nút Sửa (Màu Xanh) -->
+                                <Button Content="✍️Sửa" Command="{Binding DataContext.EditProductCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" 
+                        CommandParameter="{Binding}" Margin="5,0" Padding="5"
+                        Background="Green" Foreground="White"/>
+
+                                <!-- Nút Xóa (Màu Đỏ) -->
+                                <Button Content="🗑️Xóa" Command="{Binding DataContext.DeleteProductCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" 
+                        CommandParameter="{Binding}" Margin="5,0" Padding="5"
+                        Background="Red" Foreground="White"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+
             </DataGrid.Columns>
         </DataGrid>
             
