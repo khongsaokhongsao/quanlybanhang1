@@ -52,7 +52,7 @@ namespace QuanLyBanHang.ViewModels
             AddUserCommand = new RelayCommand(AddUser);
             EditUserCommand = new RelayCommand(EditUser);
             DeleteUserCommand = new RelayCommand(DeleteUser);
-            SearchByGenderCommand = new RelayCommand(_ => SearchByGender(null));
+            SearchByGenderCommand = new RelayCommand(_ => SearchByGenderOrRole(null));
         }
 
         private void AddUser(object obj)
@@ -203,29 +203,33 @@ namespace QuanLyBanHang.ViewModels
         }
         public ICommand SearchByGenderCommand { get; set; }
   
-        public ObservableCollection<string> GenderOptions { get; } = new ObservableCollection<string> { "Nam", "Nữ" };
-        private string _selectedGender;
-        public string SelectedGender
+        public ObservableCollection<string> GenderOptions { get; } = new ObservableCollection<string> 
+        { 
+            "Nam", "Nữ", "Khách hàng", "Quản lý", "Nhân viên", "Tất cả"
+        };
+        private string _selectedGenderOrRole;
+        public string SelectedGenderOrRole
         {
-            get => _selectedGender;
+            get => _selectedGenderOrRole;
             set
             {
-                _selectedGender = value;
-                OnPropertyChanged(nameof(SelectedGender));
+                _selectedGenderOrRole = value;
+                OnPropertyChanged(nameof(SelectedGenderOrRole));
             }
         }
-        private void SearchByGender(object obj)
+        private void SearchByGenderOrRole(object obj)
 {
     try
     {
-        if (string.IsNullOrWhiteSpace(SelectedGender))
+        if (string.IsNullOrWhiteSpace(SelectedGenderOrRole) || SelectedGenderOrRole == "Tất cả")
         {
             LoadUsers(); // Hiển thị toàn bộ nếu không chọn gì
             return;
         }
 
         var filteredUsers = _userRepository.GetAllUsers()
-                             .Where(u => u.GioiTinh.Equals(SelectedGender, StringComparison.OrdinalIgnoreCase))
+                             .Where(u => u.GioiTinh.Equals(SelectedGenderOrRole, StringComparison.OrdinalIgnoreCase) ||
+                              u.VaiTro.Equals(SelectedGenderOrRole, StringComparison.OrdinalIgnoreCase))
                              .ToList();
 
         Users.Clear();
@@ -233,8 +237,13 @@ namespace QuanLyBanHang.ViewModels
         {
             Users.Add(user);
         }
-    }
-    catch (Exception ex)
+                Console.WriteLine($"SelectedGenderOrRole: {SelectedGenderOrRole}");
+                foreach (var user in filteredUsers)
+                {
+                    Console.WriteLine($"Kết quả: {user.HoTen} - {user.GioiTinh} - {user.VaiTro}");
+                }
+            }
+            catch (Exception ex)
     {
         MessageBox.Show($"Lỗi khi tìm kiếm: {ex.Message}", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
     }

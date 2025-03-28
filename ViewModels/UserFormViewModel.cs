@@ -63,10 +63,8 @@ namespace QuanLyBanHang.ViewModels
         public List<string> VaiTroList { get; set; } = new List<string>
         {
             "Quản lý",
-            "Bán hàng",
-            "Khách hàng",
-            "Nhà cung cấp",
-            "Quản lý kho"
+            "Nhân viên",
+            "Khách hàng" 
         };
 
         public UserFormViewModel(UserModel user = null)
