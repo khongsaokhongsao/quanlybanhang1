@@ -23,10 +23,9 @@ namespace QuanLyBanHang.ViewModels
             set
             {
                 _currentView = value;
-                OnPropertyChanged();
+                OnPropertyChanged(nameof(CurrentView));
             }
         }
-
         public ICommand ShowHomeCommand { get; }
         public ICommand ShowUserManagementCommand { get; }
         public ICommand ShowProductListCommand { get; set; }
@@ -35,7 +34,7 @@ namespace QuanLyBanHang.ViewModels
         public ICommand ShowCategoryListCommand { get; set; }
         public ICommand ShowProductListForManagementCommand { get; set; }
         public ICommand AddProductForManagementCommand { get; set; }
-
+        public ICommand OpenManufacturerFormCommand { get; }
         public ObservableCollection<UserModel> Users { get; set; }
 
         private UserManagementView userManagementView;
@@ -57,6 +56,7 @@ namespace QuanLyBanHang.ViewModels
             };
 
             // Khởi tạo các Command
+            OpenManufacturerFormCommand = new RelayCommand(OpenManufacturerForm);
             ShowUserManagementCommand = new RelayCommand(ShowUserManagement);
             ShowHomeCommand = new RelayCommand(ShowHome);
             ShowProductListCommand = new RelayCommand(ShowProductList);
@@ -153,6 +153,12 @@ namespace QuanLyBanHang.ViewModels
         {
             CurrentView = _productManagementView;
             _productManagementViewModel.AddProduct(null); // Dòng 142
+        }
+        private void OpenManufacturerForm(object obj)
+        {
+            var view = new ManufacturerFormView();
+            view.DataContext = new ManufacturerFormViewModel();
+            CurrentView = view;
         }
     }
 }

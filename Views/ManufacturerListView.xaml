@@ -9,12 +9,38 @@
     <Grid Margin="10">
         <TextBlock Text="Danh sách nhà sản xuất" FontSize="20" FontWeight="Bold" Margin="0,0,0,10" />
 
-        <DataGrid ItemsSource="{Binding Manufacturers}" AutoGenerateColumns="False" Margin="0,40,0,0">
+        <DataGrid ItemsSource="{Binding Manufacturers}" 
+                  AutoGenerateColumns="False" 
+                  Margin="0,40,0,0"
+                  IsReadOnly="True"
+                  CanUserAddRows="False"
+                  CanUserDeleteRows="False">
+            
+            
             <DataGrid.Columns>
                 <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="Auto"/>
                 <DataGridTextColumn Header="Tên" Binding="{Binding Name}" Width="*"/>
                 <DataGridTextColumn Header="Địa chỉ" Binding="{Binding Address}" Width="*"/>
                 <DataGridTextColumn Header="SĐT" Binding="{Binding Phone}" Width="Auto"/>
+
+                <DataGridTemplateColumn Header="Hành động" Width="150">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                <!-- Nút Sửa (Màu Xanh) -->
+                                <Button Content="✍️Sửa" Command="{Binding DataContext.EditProductCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" 
+        CommandParameter="{Binding}" Margin="5,0" Padding="5"
+        Background="Green" Foreground="White"/>
+
+                                <!-- Nút Xóa (Màu Đỏ) -->
+                                <Button Content="🗑️Xóa" Command="{Binding DataContext.DeleteProductCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" 
+        CommandParameter="{Binding}" Margin="5,0" Padding="5"
+        Background="Red" Foreground="White"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                
             </DataGrid.Columns>
         </DataGrid>
     </Grid>
