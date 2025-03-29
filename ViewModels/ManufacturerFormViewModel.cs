@@ -11,7 +11,7 @@ namespace QuanLyBanHang.ViewModels
     public class ManufacturerFormViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
-        private static int _nextId = 1;
+        private static int _nextId = 3;
 
         private string _id;
         public string Id
