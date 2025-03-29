@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using QuanLyBanHang.ViewModels;
 
 namespace QuanLyBanHang.Views
 {
@@ -23,6 +24,9 @@ namespace QuanLyBanHang.Views
         public ManufacturerFormView()
         {
             InitializeComponent();
+            DataContext = new ManufacturerFormViewModel((manufacturer) => { });
+
         }
+
     }
 }

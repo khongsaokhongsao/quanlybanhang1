@@ -156,9 +156,29 @@ namespace QuanLyBanHang.ViewModels
         }
         private void OpenManufacturerForm(object obj)
         {
-            var view = new ManufacturerFormView();
-            view.DataContext = new ManufacturerFormViewModel();
+            var viewModel = new ManufacturerFormViewModel(OnManufacturerSaved);
+            var view = new ManufacturerFormView
+            {
+                DataContext = viewModel
+            };
             CurrentView = view;
         }
+        private void OnManufacturerSaved(ManufacturerModel newManufacturer)
+{
+    if (_manufacturerListViewModel == null)
+    {
+        _manufacturerListViewModel = new ManufacturerListViewModel();
+        _manufacturerListView = new ManufacturerListView
+        {
+            DataContext = _manufacturerListViewModel
+        };
+    }
+
+    _manufacturerListViewModel.Manufacturers.Add(newManufacturer);
+
+    CurrentView = _manufacturerListView;
+}
+
+
     }
 }

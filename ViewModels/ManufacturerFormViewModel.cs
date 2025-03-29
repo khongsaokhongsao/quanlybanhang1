@@ -3,12 +3,15 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using System.Collections.ObjectModel;
+using QuanLyBanHang.Helpers;
+using QuanLyBanHang.Models;
 
 namespace QuanLyBanHang.ViewModels
 {
     public class ManufacturerFormViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
+        private static int _nextId = 1;
 
         private string _id;
         public string Id
@@ -38,27 +41,29 @@ namespace QuanLyBanHang.ViewModels
             set { _phoneNumber = value; OnPropertyChanged(); }
         }
 
-        public ObservableCollection<Manufacturer> ManufacturerList { get; set; }
-
         public ICommand SaveCommand { get; }
 
-        public ManufacturerFormViewModel()
+        private readonly Action<ManufacturerModel> _onSavedCallback;
+
+        public ManufacturerFormViewModel(Action<ManufacturerModel> onSavedCallback)
         {
-            ManufacturerList = new ObservableCollection<Manufacturer>();
+            _onSavedCallback = onSavedCallback;
             SaveCommand = new RelayCommand(SaveManufacturer);
         }
 
         private void SaveManufacturer(object obj)
         {
-            ManufacturerList.Add(new Manufacturer
+            var newManufacturer = new ManufacturerModel
             {
-                Id = this.Id,
+                Id = _nextId.ToString(),
                 Name = this.Name,
                 Address = this.Address,
                 PhoneNumber = this.PhoneNumber
-            });
+            };
+            _nextId++;
+            _onSavedCallback?.Invoke(newManufacturer); // Gửi ngược dữ liệu về MainViewModel
 
-            // Reset form
+            // Reset form nếu cần
             Id = string.Empty;
             Name = string.Empty;
             Address = string.Empty;
@@ -70,28 +75,4 @@ namespace QuanLyBanHang.ViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
         }
     }
-
-    public class Manufacturer
-    {
-        public string Id { get; set; }
-        public string Name { get; set; }
-        public string Address { get; set; }
-        public string PhoneNumber { get; set; }
     }
-
-    public class RelayCommand : ICommand
-    {
-        private readonly Action<object> _execute;
-        private readonly Predicate<object> _canExecute;
-
-        public RelayCommand(Action<object> execute, Predicate<object> canExecute = null)
-        {
-            this._execute = execute;
-            this._canExecute = canExecute;
-        }
-
-        public bool CanExecute(object parameter) => _canExecute == null || _canExecute(parameter);
-        public event EventHandler CanExecuteChanged { add { } remove { } }
-        public void Execute(object parameter) => _execute(parameter);
-    }
-}
