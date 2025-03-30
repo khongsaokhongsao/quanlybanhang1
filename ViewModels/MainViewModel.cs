@@ -37,6 +37,8 @@ namespace QuanLyBanHang.ViewModels
         public ICommand ShowProductListForManagementCommand { get; set; }
         public ICommand AddProductForManagementCommand { get; set; }
         public ICommand ShowDanhmuctaothanhsanphamCommand { get; set; }
+        public ICommand ShowTonKhoCommand { get; set; }
+
         public ICommand OpenManufacturerFormCommand { get; }
         public ObservableCollection<UserModel> Users { get; set; }
 
@@ -51,6 +53,9 @@ namespace QuanLyBanHang.ViewModels
         private ManufacturerListViewModel _manufacturerListViewModel;
         private DanhmuctaothanhsanphamView _danhmuctaothanhsanphamView;
         private DanhmuctaothanhsanphamViewModel _danhmuctaothanhsanphamViewModel;
+        private TonKhoView _tonKhoView;
+        private TonKhoViewModel _tonkhoViewModel;
+
 
 
         public MainViewModel()
@@ -75,7 +80,7 @@ namespace QuanLyBanHang.ViewModels
             ShowProductListForManagementCommand = new RelayCommand(ShowProductListForManagement);
             AddProductForManagementCommand = new RelayCommand(AddProductForManagement);
             ShowDanhmuctaothanhsanphamCommand = new RelayCommand(ShowDanhmuctaothanhsanpham);
-
+            ShowTonKhoCommand = new RelayCommand(ShowTonKho);
 
             // Mặc định hiển thị Home
             ShowHome(null);
@@ -175,7 +180,18 @@ namespace QuanLyBanHang.ViewModels
             }
             CurrentView = _danhmuctaothanhsanphamView;
         }
-
+        private void ShowTonKho(object obj)
+        {
+            if (_tonKhoView == null)
+            {
+                _tonkhoViewModel = new TonKhoViewModel();
+                _tonKhoView = new TonKhoView
+                {
+                    DataContext = _tonkhoViewModel
+                };
+            }
+            CurrentView = _tonKhoView;
+        }
 
         private void OpenManufacturerForm(object obj)
         {
