@@ -34,6 +34,7 @@ namespace QuanLyBanHang.ViewModels
         public ICommand ShowCategoryListCommand { get; set; }
         public ICommand ShowProductListForManagementCommand { get; set; }
         public ICommand AddProductForManagementCommand { get; set; }
+        public ICommand ShowDanhmuctaothanhsanphamCommand { get; set; }
         public ICommand OpenManufacturerFormCommand { get; }
         public ObservableCollection<UserModel> Users { get; set; }
 
@@ -44,6 +45,8 @@ namespace QuanLyBanHang.ViewModels
         private ProductManagementViewModel _productManagementViewModel;
         private ManufacturerListView _manufacturerListView;
         private ManufacturerListViewModel _manufacturerListViewModel;
+        private DanhmuctaothanhsanphamView _danhmuctaothanhsanphamView;
+        private DanhmuctaothanhsanphamViewModel _danhmuctaothanhsanphamViewModel;
 
 
         public MainViewModel()
@@ -66,6 +69,7 @@ namespace QuanLyBanHang.ViewModels
             ShowCategoryListCommand = new RelayCommand(ShowCategoryList);
             ShowProductListForManagementCommand = new RelayCommand(ShowProductListForManagement);
             AddProductForManagementCommand = new RelayCommand(AddProductForManagement);
+            ShowDanhmuctaothanhsanphamCommand = new RelayCommand(ShowDanhmuctaothanhsanpham);
 
             // Mặc định hiển thị Home
             ShowHome(null);
@@ -153,6 +157,20 @@ namespace QuanLyBanHang.ViewModels
             CurrentView = _productManagementView;
             _productManagementViewModel.AddProduct(null); // Dòng 142
         }
+        private void ShowDanhmuctaothanhsanpham(object obj)
+        {
+            if (_danhmuctaothanhsanphamView == null)
+            {
+                _danhmuctaothanhsanphamViewModel = new DanhmuctaothanhsanphamViewModel();
+                _danhmuctaothanhsanphamView = new DanhmuctaothanhsanphamView
+                {
+                    DataContext = _danhmuctaothanhsanphamViewModel
+                };
+            }
+            CurrentView = _danhmuctaothanhsanphamView;
+        }
+
+
         private void OpenManufacturerForm(object obj)
         {
             var viewModel = new ManufacturerFormViewModel(OnManufacturerSaved);
