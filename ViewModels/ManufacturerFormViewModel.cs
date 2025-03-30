@@ -53,6 +53,32 @@ namespace QuanLyBanHang.ViewModels
 
         private void SaveManufacturer(object obj)
         {
+            // Kiểm tra hợp lệ
+            if (string.IsNullOrWhiteSpace(Name))
+            {
+                ShowError("Vui lòng nhập tên nhà sản xuất.");
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(Address))
+            {
+                ShowError("Vui lòng nhập địa chỉ.");
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(PhoneNumber))
+            {
+                ShowError("Vui lòng nhập số điện thoại.");
+                return;
+            }
+
+            if (!PhoneNumber.All(char.IsDigit))
+            {
+                ShowError("Số điện thoại chỉ được chứa chữ số.");
+                return;
+            }
+
+            // Nếu hợp lệ thì tạo đối tượng mới và lưu
             var newManufacturer = new ManufacturerModel
             {
                 Id = _nextId.ToString(),
@@ -61,14 +87,20 @@ namespace QuanLyBanHang.ViewModels
                 PhoneNumber = this.PhoneNumber
             };
             _nextId++;
-            _onSavedCallback?.Invoke(newManufacturer); // Gửi ngược dữ liệu về MainViewModel
 
-            // Reset form nếu cần
+            _onSavedCallback?.Invoke(newManufacturer);
+
+            // Reset form
             Id = string.Empty;
             Name = string.Empty;
             Address = string.Empty;
             PhoneNumber = string.Empty;
         }
+        private void ShowError(string message)
+        {
+            System.Windows.MessageBox.Show(message, "Lỗi", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Warning);
+        }
+
 
         private void OnPropertyChanged([CallerMemberName] string prop = "")
         {
