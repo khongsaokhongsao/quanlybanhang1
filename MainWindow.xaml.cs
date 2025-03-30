@@ -104,6 +104,8 @@ namespace QuanLyBanHang
                 ? Visibility.Collapsed
                 : Visibility.Visible;
         }
+       
+
         private ManufacturerListView _manufacturerListView;
         private ManufacturerListViewModel _manufacturerListViewModel;
 
