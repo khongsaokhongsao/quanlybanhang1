@@ -26,6 +26,8 @@ namespace QuanLyBanHang.ViewModels
                 OnPropertyChanged(nameof(CurrentView));
             }
         }
+        public ICommand ShowImportCreateCommand { get; }
+        public ICommand ShowImportListCommand { get; }
         public ICommand ShowHomeCommand { get; }
         public ICommand ShowUserManagementCommand { get; }
         public ICommand ShowProductListCommand { get; set; }
@@ -40,6 +42,8 @@ namespace QuanLyBanHang.ViewModels
 
         private UserManagementView userManagementView;
         private UserManagementViewModel userManagementViewModel;
+        private ImportListView _importListView;
+        private ImportListViewModel _importListViewModel;
 
         private ProductManagementView _productManagementView;
         private ProductManagementViewModel _productManagementViewModel;
@@ -65,11 +69,13 @@ namespace QuanLyBanHang.ViewModels
             ShowProductListCommand = new RelayCommand(ShowProductList);
             AddProductCommand = new RelayCommand(AddProduct);
             ShowManufacturerListCommand = new RelayCommand(ShowManufacturerList);
-
+            ShowImportListCommand = new RelayCommand(_ => ShowImportList());
+            ShowImportCreateCommand = new RelayCommand(_ => ShowImportCreate());
             ShowCategoryListCommand = new RelayCommand(ShowCategoryList);
             ShowProductListForManagementCommand = new RelayCommand(ShowProductListForManagement);
             AddProductForManagementCommand = new RelayCommand(AddProductForManagement);
             ShowDanhmuctaothanhsanphamCommand = new RelayCommand(ShowDanhmuctaothanhsanpham);
+
 
             // Mặc định hiển thị Home
             ShowHome(null);
@@ -195,7 +201,24 @@ namespace QuanLyBanHang.ViewModels
 
     CurrentView = _manufacturerListView;
 }
+        private void ShowImportList()
+        {
+            if (_importListView == null)
+            {
+                _importListViewModel = new ImportListViewModel();
+                _importListView = new ImportListView
+                {
+                    DataContext = _importListViewModel
+                };
+            }
 
+            CurrentView = _importListView;
+        }
+
+        private void ShowImportCreate()
+        {
+            CurrentView = new ImportCreateView();
+        }
 
     }
 }
