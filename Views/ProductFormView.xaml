@@ -76,7 +76,10 @@
 
                 <!-- Trạng thái -->
                 <GroupBox Header="Trạng thái" Margin="0 5" Height="53">
-                    <ComboBox SelectedValue="{Binding Product.IsActive}" Margin="5,0,4,0">
+                    <ComboBox ItemsSource="{Binding RelativeSource={RelativeSource Self}}"
+                              SelectedValue="{Binding Product.IsActive}"
+                              SelectedValuePath="Tag"
+                              Margin="5,0,4,0">
                         <ComboBoxItem Content="Active" Tag="True"/>
                         <ComboBoxItem Content="Inactive" Tag="False"/>
                     </ComboBox>

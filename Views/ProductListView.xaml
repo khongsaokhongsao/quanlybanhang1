@@ -45,9 +45,9 @@
                         Background="Green" Foreground="White"/>
 
                                 <!-- Nút Xóa (Màu Đỏ) -->
-                                <Button Content="🗑️Xóa" Command="{Binding DataContext.DeleteProductCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" 
-                        CommandParameter="{Binding}" Margin="5,0" Padding="5"
-                        Background="Red" Foreground="White"/>
+                                <Button Content="🗑️Xóa" Command="{Binding DataContext.DeleteProductCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+        CommandParameter="{Binding}" Margin="5,0" Padding="5"
+        Background="Red" Foreground="White"/>
                             </StackPanel>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>

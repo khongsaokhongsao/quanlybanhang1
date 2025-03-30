@@ -87,9 +87,9 @@
                     <!-- Menu con: ẩn hiện theo biến isProductMenuVisible -->
                     <StackPanel x:Name="ProductSubMenu" Visibility="Collapsed" Margin="25 0 0 0">
                         <Button Content="📋Xem danh sách sản phẩm" Style="{StaticResource MenuButtonStyle}" FontSize="14"
-                                Command="{Binding ShowProductListForManagementCommand}"/>
+                                Command="{Binding ShowProductListCommand}"/>
                         <Button Content="➕Thêm sản phẩm" Style="{StaticResource MenuButtonStyle}" FontSize="14"
-                                Command="{Binding AddProductForManagementCommand}"/>
+                                Command="{Binding AddProductCommand}"/>
                         
                         <Button Content=" 📜Danh sách nhà sản xuất" Style ="{StaticResource MenuButtonStyle}" FontSize="14"
                                 Command="{Binding ShowManufacturerListCommand}" Margin="5"/>

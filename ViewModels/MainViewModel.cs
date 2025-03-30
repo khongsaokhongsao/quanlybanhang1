@@ -111,15 +111,14 @@ namespace QuanLyBanHang.ViewModels
 
         private void ShowProductList(object obj)
         {
-            // Chức năng này cần InventoryManagementView
-            // Nếu không cần, có thể bỏ hoặc thay thế
-            throw new NotImplementedException("Chức năng Quản lý nhập hàng chưa được triển khai.");
+            CurrentView = _productManagementView;
+            _productManagementViewModel.ShowProductList(null);
         }
 
         private void AddProduct(object obj)
         {
-            // Chức năng này cần InventoryManagementView
-            throw new NotImplementedException("Chức năng Quản lý nhập hàng chưa được triển khai.");
+            CurrentView = _productManagementView;
+            _productManagementViewModel.AddProduct(null);
         }
 
         private void ShowManufacturerList(object obj)

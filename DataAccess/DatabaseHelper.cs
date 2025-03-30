@@ -89,7 +89,86 @@ namespace QuanLyBanHang.DataAccess
                         command.ExecuteNonQuery();
                     }
                 }
+                // Kiểm tra và tạo bảng Categories
+                string checkCategoriesTableQuery = "SELECT name FROM sqlite_master WHERE type='table' AND name='Categories'";
+                bool categoriesTableExists = false;
+                using (var command = new SQLiteCommand(checkCategoriesTableQuery, connection))
+                {
+                    using (var reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            categoriesTableExists = true;
+                        }
+                    }
+                }
+
+                if (!categoriesTableExists)
+                {
+                    string createCategoriesTableQuery = @"
+                        CREATE TABLE Categories (
+                            Id INTEGER PRIMARY KEY AUTOINCREMENT,
+                            Name TEXT NOT NULL
+                        )";
+                    using (var command = new SQLiteCommand(createCategoriesTableQuery, connection))
+                    {
+                        command.ExecuteNonQuery();
+                    }
+
+                    string insertCategoriesQuery = @"
+                        INSERT INTO Categories (Name) VALUES ('Điện tử');
+                        INSERT INTO Categories (Name) VALUES ('Thời trang');
+                    ";
+                    using (var command = new SQLiteCommand(insertCategoriesQuery, connection))
+                    {
+                        command.ExecuteNonQuery();
+                    }
+                }
+
+                // Kiểm tra và tạo bảng Products
+                string checkProductsTableQuery = "SELECT name FROM sqlite_master WHERE type='table' AND name='Products'";
+                bool productsTableExists = false;
+                using (var command = new SQLiteCommand(checkProductsTableQuery, connection))
+                {
+                    using (var reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            productsTableExists = true;
+                        }
+                    }
+                }
+
+                if (!productsTableExists)
+                {
+                    string createProductsTableQuery = @"
+                        CREATE TABLE Products (
+                            Id INTEGER PRIMARY KEY AUTOINCREMENT,
+                            Name TEXT NOT NULL,
+                            CategoryId INTEGER NOT NULL,
+                            Price DECIMAL NOT NULL,
+                            Stock INTEGER NOT NULL,
+                            IsActive BOOLEAN NOT NULL,
+                            FOREIGN KEY (CategoryId) REFERENCES Categories(Id)
+                        )";
+                    using (var command = new SQLiteCommand(createProductsTableQuery, connection))
+                    {
+                        command.ExecuteNonQuery();
+                    }
+
+                    string insertProductsQuery = @"
+                        INSERT INTO Products (Name, CategoryId, Price, Stock, IsActive)
+                        VALUES ('Điện thoại', 1, 10000000, 50, 1);
+                        INSERT INTO Products (Name, CategoryId, Price, Stock, IsActive)
+                        VALUES ('Áo thun', 2, 200000, 100, 0);
+                    ";
+                    using (var command = new SQLiteCommand(insertProductsQuery, connection))
+                    {
+                        command.ExecuteNonQuery();
+                    }
+                }
             }
+
         }
     }
 }
