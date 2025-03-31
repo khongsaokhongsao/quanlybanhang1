@@ -47,6 +47,8 @@ namespace QuanLyBanHang.ViewModels
         private ManufacturerListViewModel _manufacturerListViewModel;
         private DanhmuctaothanhsanphamView _danhmuctaothanhsanphamView;
         private DanhmuctaothanhsanphamViewModel _danhmuctaothanhsanphamViewModel;
+        private CategoryListView _categoryListView; // View cho danh mục
+        private CategoryListViewModel _categoryListViewModel; // ViewModel cho danh mục
 
 
         public MainViewModel()
@@ -58,6 +60,12 @@ namespace QuanLyBanHang.ViewModels
                 DataContext = _productManagementViewModel
             };
 
+            _categoryListViewModel = new CategoryListViewModel();
+            _categoryListView = new CategoryListView
+            {
+                DataContext = _categoryListViewModel
+            };
+
             // Khởi tạo các Command
             OpenManufacturerFormCommand = new RelayCommand(OpenManufacturerForm);
             ShowUserManagementCommand = new RelayCommand(ShowUserManagement);
@@ -66,7 +74,7 @@ namespace QuanLyBanHang.ViewModels
             AddProductCommand = new RelayCommand(AddProduct);
             ShowManufacturerListCommand = new RelayCommand(ShowManufacturerList);
 
-            ShowCategoryListCommand = new RelayCommand(ShowCategoryList);
+            ShowCategoryListCommand = new RelayCommand(ShowCategoryListForManagement);
             ShowProductListForManagementCommand = new RelayCommand(ShowProductListForManagement);
             AddProductForManagementCommand = new RelayCommand(AddProductForManagement);
             ShowDanhmuctaothanhsanphamCommand = new RelayCommand(ShowDanhmuctaothanhsanpham);
@@ -95,6 +103,20 @@ namespace QuanLyBanHang.ViewModels
             });
 
             CurrentView = new WelcomeView();
+        }
+        // Phương thức công khai để cập nhật danh sách danh mục trong ProductManagementViewModel
+        public void UpdateProductManagementCategories()
+        {
+            if (_productManagementViewModel != null)
+            {
+                var categoryRepository = new CategoryRepository();
+                _productManagementViewModel.Categories.Clear();
+                var updatedCategories = categoryRepository.GetAllCategories();
+                foreach (var category in updatedCategories)
+                {
+                    _productManagementViewModel.Categories.Add(category);
+                }
+            }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -140,10 +162,10 @@ namespace QuanLyBanHang.ViewModels
         }
 
 
-        private void ShowCategoryList(object obj)
+        private void ShowCategoryListForManagement(object obj)
         {
-            // Chức năng này cần InventoryManagementView
-            throw new NotImplementedException("Chức năng Quản lý nhập hàng chưa được triển khai.");
+            CurrentView = _categoryListView;
+            _categoryListViewModel.ShowCategoryList(null); // Gọi để đảm bảo hiển thị danh sách
         }
 
         private void ShowProductListForManagement(object obj)
