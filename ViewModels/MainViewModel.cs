@@ -40,7 +40,7 @@ namespace QuanLyBanHang.ViewModels
         public ICommand ShowTonKhoCommand { get; set; }
         public ICommand OpenManufacturerFormCommand { get; }
         public ICommand ShowTimkiemsanphamViewCommand { get; set; }
-        public ICommand ShowProductSearchViewCommand { get; set; }
+       
 
 
 
