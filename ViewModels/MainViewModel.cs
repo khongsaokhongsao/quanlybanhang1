@@ -61,6 +61,14 @@ namespace QuanLyBanHang.ViewModels
         private ManufacturerListViewModel _manufacturerListViewModel;
         private DanhmuctaothanhsanphamView _danhmuctaothanhsanphamView;
         private DanhmuctaothanhsanphamViewModel _danhmuctaothanhsanphamViewModel;
+        private CategoryListView _categoryListView;
+        private CategoryListViewModel _categoryListViewModel;
+        private TimkiemsanphamView _timkiemsanphamView;
+        private TimkiemsanphamViewModel _timkiemsanphamViewModel;
+        private TonKhoView _tonKhoView;
+        private TonKhoViewModel _tonkhoViewModel;
+
+
 
 
         public MainViewModel()
@@ -221,7 +229,8 @@ namespace QuanLyBanHang.ViewModels
         }
         private void ShowTonKho(object obj)
         {
-            if (_tonKhoView == null)
+            if (
+                _tonKhoView == null)
             {
                 _tonkhoViewModel = new TonKhoViewModel();
                 _tonKhoView = new TonKhoView

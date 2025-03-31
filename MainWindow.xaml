@@ -8,9 +8,9 @@
         mc:Ignorable="d"
         Title="Quản lý bán hàng" Height="720" Width="1280">
     <!-- ✅ Gắn ViewModel -->
-    <Window.DataContext>
+    <!--<Window.DataContext>
         <vm:MainViewModel />
-    </Window.DataContext>
+    </Window.DataContext>-->
 
 
     <!-- ✅ Định nghĩa Resource -->
@@ -97,7 +97,8 @@
 
                         <Button Content="🔄Thêm nhà sản xuất" Style="{StaticResource MenuButtonStyle}" FontSize="14"
                                 Command="{Binding OpenManufacturerFormCommand}"/>
-                        <Button Content="🗂️Quản lý loại sản phẩm" Style="{StaticResource MenuButtonStyle}" FontSize="14"/>
+                        <Button Content="🗂️Quản lý loại sản phẩm" Style="{StaticResource MenuButtonStyle}" FontSize="14"
+                                Command="{Binding ShowCategoryListCommand}"/>
                         <Button Content="🔍Tìm kiếm sản phẩm" Style="{StaticResource MenuButtonStyle}" FontSize="14"/>
                     </StackPanel>
                 </StackPanel>
