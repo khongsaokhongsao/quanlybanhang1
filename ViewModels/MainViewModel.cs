@@ -71,6 +71,7 @@ namespace QuanLyBanHang.ViewModels
 
 
 
+
         public MainViewModel()
         {
             // Khởi tạo ProductManagementView và ViewModel
@@ -100,6 +101,8 @@ namespace QuanLyBanHang.ViewModels
             ShowDanhmuctaothanhsanphamCommand = new RelayCommand(ShowDanhmuctaothanhsanpham);
             ShowTonKhoCommand = new RelayCommand(ShowTonKho);
             ShowTimkiemsanphamViewCommand = new RelayCommand(ShowTimkiemsanpham);
+            ShowImportCreateCommand = new RelayCommand(o => ShowImportCreate());
+            ShowImportListCommand = new RelayCommand(o => ShowImportList());
 
 
 
