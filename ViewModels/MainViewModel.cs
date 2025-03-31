@@ -39,6 +39,7 @@ namespace QuanLyBanHang.ViewModels
         public ICommand ShowDanhmuctaothanhsanphamCommand { get; set; }
         public ICommand ShowTonKhoCommand { get; set; }
         public ICommand OpenManufacturerFormCommand { get; }
+        public ICommand ShowTimkiemsanphamViewCommand { get; set; }
         public ICommand ShowProductSearchViewCommand { get; set; }
 
 
@@ -61,11 +62,8 @@ namespace QuanLyBanHang.ViewModels
         private DanhmuctaothanhsanphamViewModel _danhmuctaothanhsanphamViewModel;
         private TonKhoView _tonKhoView;
         private TonKhoViewModel _tonkhoViewModel;
-
-
-        private ProductSearchView _productSearchView;
-        private ProductSearchViewModel _productSearchViewModel;
-
+        private TimkiemsanphamView _timkiemsanphamView;
+        private TimkiemsanphamViewModel _timkiemsanphamViewModel;
         public MainViewModel()
         {
             // Khởi tạo ProductManagementView và ViewModel
@@ -89,7 +87,7 @@ namespace QuanLyBanHang.ViewModels
             AddProductForManagementCommand = new RelayCommand(AddProductForManagement);
             ShowDanhmuctaothanhsanphamCommand = new RelayCommand(ShowDanhmuctaothanhsanpham);
             ShowTonKhoCommand = new RelayCommand(ShowTonKho);
-            ShowProductSearchViewCommand = new RelayCommand(ShowProductSearchView);
+            ShowTimkiemsanphamViewCommand = new RelayCommand(ShowTimkiemsanpham);
 
 
 
@@ -130,7 +128,18 @@ namespace QuanLyBanHang.ViewModels
         {
             CurrentView = new UserManagementView();
         }
-
+        private void ShowTimkiemsanpham(object obj)
+        {
+            if (_timkiemsanphamView == null)
+            {
+                _timkiemsanphamViewModel = new TimkiemsanphamViewModel();
+                _timkiemsanphamView = new TimkiemsanphamView
+                {
+                    DataContext = _timkiemsanphamViewModel
+                };
+            }
+            CurrentView = _timkiemsanphamView;
+        }
         private void ShowHome(object obj)
         {
             CurrentView = null; // Thay thế bằng giao diện Home nếu có
@@ -247,16 +256,6 @@ namespace QuanLyBanHang.ViewModels
         {
             CurrentView = new ImportCreateView();
         }
-        private void ShowProductSearchView(object obj)
-        {
-            var productSearchViewModel = new ProductSearchViewModel();
-            var productSearchView = new ProductSearchView
-            {
-                DataContext = productSearchViewModel
-            };
-            CurrentView = _productSearchView;
-        }
-
-
+        
     }
 }

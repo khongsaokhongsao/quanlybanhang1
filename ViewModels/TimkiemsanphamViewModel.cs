@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace QuanLyBanHang.ViewModels
 {
-    class ProductSearchViewModel
+    internal class TimkiemsanphamViewModel
     {
     }
 }
