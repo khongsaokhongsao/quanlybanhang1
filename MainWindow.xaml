@@ -95,7 +95,8 @@
                         <Button Content="🔄Thêm nhà sản xuất" Style="{StaticResource MenuButtonStyle}" FontSize="14"
                                 Command="{Binding OpenManufacturerFormCommand}"/>
                         <Button Content="🗂️Quản lý loại sản phẩm" Style="{StaticResource MenuButtonStyle}" FontSize="14"/>
-                        <Button Content="🔍Tìm kiếm sản phẩm" Style="{StaticResource MenuButtonStyle}" FontSize="14"/>
+                        <Button Content="🔍Tìm kiếm sản phẩm" Style="{StaticResource MenuButtonStyle}" FontSize="14"
+                                Command="{Binding ShowProductSearchViewCommand}" />
                     </StackPanel>
                 </StackPanel>
 

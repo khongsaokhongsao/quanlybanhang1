@@ -38,8 +38,14 @@ namespace QuanLyBanHang.ViewModels
         public ICommand AddProductForManagementCommand { get; set; }
         public ICommand ShowDanhmuctaothanhsanphamCommand { get; set; }
         public ICommand ShowTonKhoCommand { get; set; }
-
         public ICommand OpenManufacturerFormCommand { get; }
+        public ICommand ShowProductSearchViewCommand { get; set; }
+
+
+
+
+
+
         public ObservableCollection<UserModel> Users { get; set; }
 
         private UserManagementView userManagementView;
@@ -57,6 +63,8 @@ namespace QuanLyBanHang.ViewModels
         private TonKhoViewModel _tonkhoViewModel;
 
 
+        private ProductSearchView _productSearchView;
+        private ProductSearchViewModel _productSearchViewModel;
 
         public MainViewModel()
         {
@@ -81,6 +89,10 @@ namespace QuanLyBanHang.ViewModels
             AddProductForManagementCommand = new RelayCommand(AddProductForManagement);
             ShowDanhmuctaothanhsanphamCommand = new RelayCommand(ShowDanhmuctaothanhsanpham);
             ShowTonKhoCommand = new RelayCommand(ShowTonKho);
+            ShowProductSearchViewCommand = new RelayCommand(ShowProductSearchView);
+
+
+
 
             // Mặc định hiển thị Home
             ShowHome(null);
@@ -149,8 +161,8 @@ namespace QuanLyBanHang.ViewModels
 
             CurrentView = _manufacturerListView;
         }
-
-
+         
+    
         private void ShowCategoryList(object obj)
         {
             // Chức năng này cần InventoryManagementView
@@ -235,6 +247,16 @@ namespace QuanLyBanHang.ViewModels
         {
             CurrentView = new ImportCreateView();
         }
+        private void ShowProductSearchView(object obj)
+        {
+            var productSearchViewModel = new ProductSearchViewModel();
+            var productSearchView = new ProductSearchView
+            {
+                DataContext = productSearchViewModel
+            };
+            CurrentView = _productSearchView;
+        }
+
 
     }
 }
