@@ -8,9 +8,16 @@ namespace QuanLyBanHang.Models
 {
     public class ManufacturerModel
     {
-        public string Id { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
         public string Address { get; set; }
-        public string PhoneNumber { get; set; }
+        public string Phone { get; set; }
+
+        // Kiểm tra ràng buộc khi thêm hoặc sửa nhà sản xuất
+        public void Validate()
+        {
+            if (string.IsNullOrWhiteSpace(Name))
+                throw new ArgumentException("Tên nhà sản xuất không được để trống.");
+        }
     }
 }

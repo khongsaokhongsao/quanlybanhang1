@@ -3,44 +3,65 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:QuanLyBanHang.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid Margin="10">
-        <TextBlock Text="Danh sách nhà sản xuất" FontSize="20" FontWeight="Bold" Margin="0,0,0,10" />
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
 
-        <DataGrid ItemsSource="{Binding Manufacturers}" 
-                  AutoGenerateColumns="False" 
-                  Margin="0,40,0,0"
+        <!-- Tiêu đề và nút thêm -->
+        <StackPanel Orientation="Horizontal" Margin="10">
+            <TextBlock Text="Danh sách nhà sản xuất" FontSize="24" FontWeight="Bold"/>
+        </StackPanel>
+
+        <!-- Bộ lọc -->
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="10">
+            <!-- Lọc theo tên -->
+            <GroupBox Header="Tên nhà sản xuất" Margin="5">
+                <TextBox Width="150" Text="{Binding SearchName, UpdateSourceTrigger=PropertyChanged}" Margin="5"/>
+            </GroupBox>
+
+            <!-- Lọc theo số điện thoại -->
+            <GroupBox Header="Số điện thoại" Margin="5">
+                <TextBox Width="150" Text="{Binding SearchPhone, UpdateSourceTrigger=PropertyChanged}" Margin="5"/>
+            </GroupBox>
+
+            <!-- Nút lọc -->
+            <Button Content="Tìm kiếm" Command="{Binding FilterManufacturersCommand}" Margin="5"
+                    Background="Green" Foreground="White" Padding="5"/>
+        </StackPanel>
+
+        <!-- Danh sách nhà sản xuất -->
+        <DataGrid Grid.Row="2"
+                  ItemsSource="{Binding Manufacturers}"
+                  SelectedItem="{Binding SelectedManufacturer}"
+                  AutoGenerateColumns="False"
                   IsReadOnly="True"
                   CanUserAddRows="False"
-                  CanUserDeleteRows="False">
-            
-            
+                  CanUserDeleteRows="False"
+                  Margin="10">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="Auto"/>
-                <DataGridTextColumn Header="Tên" Binding="{Binding Name}" Width="*"/>
+                <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="50"/>
+                <DataGridTextColumn Header="Tên nhà sản xuất" Binding="{Binding Name}" Width="*"/>
                 <DataGridTextColumn Header="Địa chỉ" Binding="{Binding Address}" Width="*"/>
-                <DataGridTextColumn Header="SĐT" Binding="{Binding PhoneNumber}" Width="Auto"/>
-
+                <DataGridTextColumn Header="Số điện thoại" Binding="{Binding Phone}" Width="*"/>
                 <DataGridTemplateColumn Header="Hành động" Width="150">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                <!-- Nút Sửa (Màu Xanh) -->
-                                <Button Content="✍️Sửa" Command="{Binding DataContext.EditProductCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" 
-        CommandParameter="{Binding}" Margin="5,0" Padding="5"
-        Background="Green" Foreground="White"/>
-
-                                <!-- Nút Xóa (Màu Đỏ) -->
-                                <Button Content="🗑️Xóa" Command="{Binding DataContext.DeleteProductCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" 
-        CommandParameter="{Binding}" Margin="5,0" Padding="5"
-        Background="Red" Foreground="White"/>
+                                <Button Content="✍️Sửa" Command="{Binding DataContext.EditManufacturerCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" 
+                                        CommandParameter="{Binding }" Margin="5,0" Padding="5"
+                                        Background="Green" Foreground="White"/>
+                                <Button Content="🗑️Xóa" Command="{Binding DataContext.DeleteManufacturerCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" 
+                                        CommandParameter="{Binding }" Margin="5,0" Padding="5"
+                                        Background="Red" Foreground="White"/>
                             </StackPanel>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

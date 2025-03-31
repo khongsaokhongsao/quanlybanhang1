@@ -167,6 +167,45 @@ namespace QuanLyBanHang.DataAccess
                         command.ExecuteNonQuery();
                     }
                 }
+                // Kiểm tra và tạo bảng Manufacturers
+                string checkManufacturersTableQuery = "SELECT name FROM sqlite_master WHERE type='table' AND name='Manufacturers'";
+                bool manufacturersTableExists = false;
+                using (var command = new SQLiteCommand(checkManufacturersTableQuery, connection))
+                {
+                    using (var reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            manufacturersTableExists = true;
+                        }
+                    }
+                }
+
+                if (!manufacturersTableExists)
+                {
+                    string createManufacturersTableQuery = @"
+                        CREATE TABLE Manufacturers (
+                            Id INTEGER PRIMARY KEY AUTOINCREMENT,
+                            Name TEXT NOT NULL,
+                            Address TEXT,
+                            Phone TEXT
+                        )";
+                    using (var command = new SQLiteCommand(createManufacturersTableQuery, connection))
+                    {
+                        command.ExecuteNonQuery();
+                    }
+
+                    string insertManufacturersQuery = @"
+                        INSERT INTO Manufacturers (Name, Address, Phone)
+                        VALUES ('Samsung', 'Hà Nội', '0123456789');
+                        INSERT INTO Manufacturers (Name, Address, Phone)
+                        VALUES ('Nike', 'TP. Hồ Chí Minh', '0987654321');
+                    ";
+                    using (var command = new SQLiteCommand(insertManufacturersQuery, connection))
+                    {
+                        command.ExecuteNonQuery();
+                    }
+                }
             }
 
         }

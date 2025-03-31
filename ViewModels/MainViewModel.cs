@@ -32,15 +32,18 @@ namespace QuanLyBanHang.ViewModels
         public ICommand ShowUserManagementCommand { get; }
         public ICommand ShowProductListCommand { get; set; }
         public ICommand AddProductCommand { get; set; }
-        public ICommand ShowManufacturerListCommand { get; set; }
+
         public ICommand ShowCategoryListCommand { get; set; }
         public ICommand ShowProductListForManagementCommand { get; set; }
         public ICommand AddProductForManagementCommand { get; set; }
         public ICommand ShowDanhmuctaothanhsanphamCommand { get; set; }
         public ICommand ShowTonKhoCommand { get; set; }
-        public ICommand OpenManufacturerFormCommand { get; }
+        //public ICommand OpenManufacturerFormCommand { get; }
         public ICommand ShowTimkiemsanphamViewCommand { get; set; }
-       
+        public ICommand ShowManufacturerListCommand { get; set; }
+        public ICommand AddManufacturerCommand { get; set; }
+
+
 
 
 
@@ -86,14 +89,20 @@ namespace QuanLyBanHang.ViewModels
             {
                 DataContext = _categoryListViewModel
             };
+            _manufacturerListViewModel = new ManufacturerListViewModel();
+            _manufacturerListView = new ManufacturerListView
+            {
+                DataContext = _manufacturerListViewModel
+            };
 
             // Khởi tạo các Command
-            OpenManufacturerFormCommand = new RelayCommand(OpenManufacturerForm);
+            //OpenManufacturerFormCommand = new RelayCommand(OpenManufacturerForm);
             ShowUserManagementCommand = new RelayCommand(ShowUserManagement);
             ShowHomeCommand = new RelayCommand(ShowHome);
             ShowProductListCommand = new RelayCommand(ShowProductList);
             AddProductCommand = new RelayCommand(AddProduct);
             ShowManufacturerListCommand = new RelayCommand(ShowManufacturerList);
+            AddManufacturerCommand = new RelayCommand(AddManufacturer); // Thêm command mới
 
             ShowCategoryListCommand = new RelayCommand(ShowCategoryList);
             ShowProductListForManagementCommand = new RelayCommand(ShowProductListForManagement);
@@ -103,7 +112,7 @@ namespace QuanLyBanHang.ViewModels
             ShowTimkiemsanphamViewCommand = new RelayCommand(ShowTimkiemsanpham);
             ShowImportCreateCommand = new RelayCommand(o => ShowImportCreate());
             ShowImportListCommand = new RelayCommand(o => ShowImportList());
-
+            
 
 
 
@@ -188,16 +197,30 @@ namespace QuanLyBanHang.ViewModels
 
         private void ShowManufacturerList(object obj)
         {
-            if (_manufacturerListView == null)
-            {
-                _manufacturerListViewModel = new ManufacturerListViewModel();
-                _manufacturerListView = new ManufacturerListView
-                {
-                    DataContext = _manufacturerListViewModel
-                };
-            }
-
             CurrentView = _manufacturerListView;
+            _manufacturerListViewModel.ShowManufacturerList(null); // Gọi để đảm bảo hiển thị danh sách
+        }
+
+        private void AddManufacturer(object obj)
+        {
+            // Tạo một instance mới của ManufacturerListViewModel nếu chưa có
+            //if (_manufacturerListViewModel == null)
+            //{
+            //    _manufacturerListViewModel = new ManufacturerListViewModel();
+            //    _manufacturerListView = new ManufacturerListView
+            //    {
+            //        DataContext = _manufacturerListViewModel
+            //    };
+            //}
+
+            // Mở trực tiếp ManufacturerFormView
+            var manufacturer = new ManufacturerModel();
+            var formView = new ManufacturerFormView
+            {
+                DataContext = _manufacturerListViewModel
+            };
+            _manufacturerListViewModel.Manufacturer = manufacturer; // Gán đối tượng để binding
+            CurrentView = formView;
         }
 
 
@@ -244,30 +267,30 @@ namespace QuanLyBanHang.ViewModels
             CurrentView = _tonKhoView;
         }
 
-        private void OpenManufacturerForm(object obj)
-        {
-            var viewModel = new ManufacturerFormViewModel(OnManufacturerSaved);
-            var view = new ManufacturerFormView
-            {
-                DataContext = viewModel
-            };
-            CurrentView = view;
-        }
+        //private void OpenManufacturerForm(object obj)
+        //{
+        //    var viewModel = new ManufacturerFormViewModel(OnManufacturerSaved);
+        //    var view = new ManufacturerFormView
+        //    {
+        //        DataContext = viewModel
+        //    };
+        //    CurrentView = view;
+        //}
         private void OnManufacturerSaved(ManufacturerModel newManufacturer)
-{
-    if (_manufacturerListViewModel == null)
-    {
-        _manufacturerListViewModel = new ManufacturerListViewModel();
-        _manufacturerListView = new ManufacturerListView
         {
-            DataContext = _manufacturerListViewModel
-        };
-    }
+            if (_manufacturerListViewModel == null)
+            {
+                _manufacturerListViewModel = new ManufacturerListViewModel();
+                _manufacturerListView = new ManufacturerListView
+                {
+                    DataContext = _manufacturerListViewModel
+                };
+            }
 
-    _manufacturerListViewModel.Manufacturers.Add(newManufacturer);
+            _manufacturerListViewModel.Manufacturers.Add(newManufacturer);
 
-    CurrentView = _manufacturerListView;
-}
+            CurrentView = _manufacturerListView;
+        }
         // Hàm để quay về danh sách nhập kho
         private void ShowImportList()
         {

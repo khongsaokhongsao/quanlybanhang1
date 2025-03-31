@@ -38,39 +38,37 @@
 
     <Border Padding="20" CornerRadius="0" Background="White" 
             BorderBrush="Gray" BorderThickness="1">
-        <Grid>
+        <Grid Margin="20">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
+            
 
-            <!-- Tiêu đề -->
-            <TextBlock Text="Thêm nhà sản xuất" FontSize="22" FontWeight="Bold" 
-                       Foreground="Black" HorizontalAlignment="Center" Margin="0 10"/>
+            <!-- Tên nhà sản xuất -->
+            <GroupBox Header="Tên nhà sản xuất" Grid.Row="0" Margin="0,5">
+                <TextBox Text="{Binding Manufacturer.Name, UpdateSourceTrigger=PropertyChanged}" Margin="5"/>
+            </GroupBox>
 
-            <!-- Nội dung Form -->
-            <StackPanel Grid.Row="1" Margin="0 10">
-                <!-- Tên nhà sản xuất -->
-                <GroupBox Header="Tên nhà sản xuất" Margin="0 5" Height="53">
-                    <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" Margin="5,0,2,0"/>
-                </GroupBox>
+            <!-- Địa chỉ -->
+            <GroupBox Header="Địa chỉ" Grid.Row="1" Margin="0,5">
+                <TextBox Text="{Binding Manufacturer.Address, UpdateSourceTrigger=PropertyChanged}" Margin="5"/>
+            </GroupBox>
 
-                <!-- Địa chỉ -->
-                <GroupBox Header="Địa chỉ" Margin="0 5" Height="53">
-                    <TextBox Text="{Binding Address, UpdateSourceTrigger=PropertyChanged}" Margin="5,0,2,0"/>
-                </GroupBox>
+            <!-- Số điện thoại -->
+            <GroupBox Header="Số điện thoại" Grid.Row="2" Margin="0,5">
+                <TextBox Text="{Binding Manufacturer.Phone, UpdateSourceTrigger=PropertyChanged}" Margin="5"/>
+            </GroupBox>
 
-                <!-- Số điện thoại -->
-                <GroupBox Header="Số điện thoại" Margin="0 5" Height="53">
-                    <TextBox Text="{Binding PhoneNumber, UpdateSourceTrigger=PropertyChanged}" Margin="5,0,2,0"/>
-                </GroupBox>
+            <!-- Nút lưu và hủy -->
+            <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,20,0,0">
+                <Button Content="Lưu" Width="100" Height="30" Margin="5" Background="DodgerBlue" Foreground="White"
+                    Command="{Binding SaveManufacturerCommand}"/>
+                <Button Content="Hủy" Width="100" Height="30" Margin="5" Background="Gray" Foreground="White"
+                    Command="{Binding ShowManufacturerListCommand}"/>
             </StackPanel>
-
-            <!-- Nút lưu -->
-            <Button Grid.Row="2" Content="Lưu" Command="{Binding SaveCommand}" 
-                    Style="{StaticResource RoundedButtonStyle}"
-                    HorizontalAlignment="Center" Margin="0 20"/>
         </Grid>
     </Border>
 </UserControl>

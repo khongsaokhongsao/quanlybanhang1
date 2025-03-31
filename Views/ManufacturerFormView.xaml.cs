@@ -24,7 +24,7 @@ namespace QuanLyBanHang.Views
         public ManufacturerFormView()
         {
             InitializeComponent();
-            DataContext = new ManufacturerFormViewModel((manufacturer) => { });
+            //DataContext = new ManufacturerFormViewModel((manufacturer) => { });
 
         }
 
