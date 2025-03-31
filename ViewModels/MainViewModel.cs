@@ -44,7 +44,8 @@ namespace QuanLyBanHang.ViewModels
         private UserManagementViewModel userManagementViewModel;
         private ImportListView _importListView;
         private ImportListViewModel _importListViewModel;
-
+        private ImportCreateView _importCreateView;
+        private ImportCreateViewModel _importCreateViewModel;
         private ProductManagementView _productManagementView;
         private ProductManagementViewModel _productManagementViewModel;
         private ManufacturerListView _manufacturerListView;
@@ -201,6 +202,7 @@ namespace QuanLyBanHang.ViewModels
 
     CurrentView = _manufacturerListView;
 }
+        // Hàm để quay về danh sách nhập kho
         private void ShowImportList()
         {
             if (_importListView == null)
@@ -211,13 +213,31 @@ namespace QuanLyBanHang.ViewModels
                     DataContext = _importListViewModel
                 };
             }
-
             CurrentView = _importListView;
         }
 
         private void ShowImportCreate()
         {
-            CurrentView = new ImportCreateView();
+            _importCreateViewModel = new ImportCreateViewModel(OnImportSaved, ShowImportList);
+            _importCreateView = new ImportCreateView
+            {
+                DataContext = _importCreateViewModel
+            };
+            CurrentView = _importCreateView;
+        }
+        // Hàm này sẽ được gọi khi lưu phiếu nhập
+        private void OnImportSaved(Import newImport)
+        {
+            if (_importListViewModel == null)
+            {
+                _importListViewModel = new ImportListViewModel();
+                _importListView = new ImportListView
+                {
+                    DataContext = _importListViewModel
+                };
+            }
+
+            _importListViewModel.Imports.Add(newImport);
         }
 
     }

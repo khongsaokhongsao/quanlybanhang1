@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using QuanLyBanHang.Models;
 
 namespace QuanLyBanHang.Views
 {
@@ -23,6 +24,13 @@ namespace QuanLyBanHang.Views
         public ImportListView()
         {
             InitializeComponent();
+        }
+        private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (sender is DataGrid dataGrid && dataGrid.SelectedItem is Import selectedImport)
+            {
+                MessageBox.Show($"Bạn đã chọn phiếu nhập hàng: {selectedImport.ProductName}");
+            }
         }
     }
 }

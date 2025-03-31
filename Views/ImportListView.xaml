@@ -21,7 +21,7 @@
                 <DataGridTextColumn Header="Mã nhập" Binding="{Binding Id}" Width="Auto"/>
                 <DataGridTextColumn Header="Tên sản phẩm" Binding="{Binding ProductName}" Width="*"/>
                 <DataGridTextColumn Header="Số lượng" Binding="{Binding Quantity}" Width="Auto"/>
-                <DataGridTextColumn Header="Ngày nhập" Binding="{Binding ImportDate, StringFormat=dd/MM/yyyy}" Width="Auto"/>
+                <DataGridTextColumn Header="Ngày nhập" Binding="{Binding ImportDate}" Width="Auto"/>
                 <DataGridTextColumn Header="Nhà cung cấp" Binding="{Binding Supplier}" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
