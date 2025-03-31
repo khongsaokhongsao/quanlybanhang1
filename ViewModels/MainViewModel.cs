@@ -37,7 +37,16 @@ namespace QuanLyBanHang.ViewModels
         public ICommand ShowProductListForManagementCommand { get; set; }
         public ICommand AddProductForManagementCommand { get; set; }
         public ICommand ShowDanhmuctaothanhsanphamCommand { get; set; }
+        public ICommand ShowTonKhoCommand { get; set; }
         public ICommand OpenManufacturerFormCommand { get; }
+        public ICommand ShowTimkiemsanphamViewCommand { get; set; }
+       
+
+
+
+
+
+
         public ObservableCollection<UserModel> Users { get; set; }
 
         private UserManagementView userManagementView;
@@ -52,8 +61,10 @@ namespace QuanLyBanHang.ViewModels
         private ManufacturerListViewModel _manufacturerListViewModel;
         private DanhmuctaothanhsanphamView _danhmuctaothanhsanphamView;
         private DanhmuctaothanhsanphamViewModel _danhmuctaothanhsanphamViewModel;
-
-
+        private TonKhoView _tonKhoView;
+        private TonKhoViewModel _tonkhoViewModel;
+        private TimkiemsanphamView _timkiemsanphamView;
+        private TimkiemsanphamViewModel _timkiemsanphamViewModel;
         public MainViewModel()
         {
             // Khởi tạo ProductManagementView và ViewModel
@@ -76,6 +87,10 @@ namespace QuanLyBanHang.ViewModels
             ShowProductListForManagementCommand = new RelayCommand(ShowProductListForManagement);
             AddProductForManagementCommand = new RelayCommand(AddProductForManagement);
             ShowDanhmuctaothanhsanphamCommand = new RelayCommand(ShowDanhmuctaothanhsanpham);
+            ShowTonKhoCommand = new RelayCommand(ShowTonKho);
+            ShowTimkiemsanphamViewCommand = new RelayCommand(ShowTimkiemsanpham);
+
+
 
 
             // Mặc định hiển thị Home
@@ -114,7 +129,18 @@ namespace QuanLyBanHang.ViewModels
         {
             CurrentView = new UserManagementView();
         }
-
+        private void ShowTimkiemsanpham(object obj)
+        {
+            if (_timkiemsanphamView == null)
+            {
+                _timkiemsanphamViewModel = new TimkiemsanphamViewModel();
+                _timkiemsanphamView = new TimkiemsanphamView
+                {
+                    DataContext = _timkiemsanphamViewModel
+                };
+            }
+            CurrentView = _timkiemsanphamView;
+        }
         private void ShowHome(object obj)
         {
             CurrentView = null; // Thay thế bằng giao diện Home nếu có
@@ -145,8 +171,8 @@ namespace QuanLyBanHang.ViewModels
 
             CurrentView = _manufacturerListView;
         }
-
-
+         
+    
         private void ShowCategoryList(object obj)
         {
             // Chức năng này cần InventoryManagementView
@@ -176,7 +202,18 @@ namespace QuanLyBanHang.ViewModels
             }
             CurrentView = _danhmuctaothanhsanphamView;
         }
-
+        private void ShowTonKho(object obj)
+        {
+            if (_tonKhoView == null)
+            {
+                _tonkhoViewModel = new TonKhoViewModel();
+                _tonKhoView = new TonKhoView
+                {
+                    DataContext = _tonkhoViewModel
+                };
+            }
+            CurrentView = _tonKhoView;
+        }
 
         private void OpenManufacturerForm(object obj)
         {
@@ -239,6 +276,6 @@ namespace QuanLyBanHang.ViewModels
 
             _importListViewModel.Imports.Add(newImport);
         }
-
+        
     }
 }

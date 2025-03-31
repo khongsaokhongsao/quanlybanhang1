@@ -98,6 +98,7 @@ namespace QuanLyBanHang.ViewModels
         public ICommand DeleteProductCommand { get; set; }
         public ICommand SaveProductCommand { get; set; }
         public ICommand FilterProductsCommand { get; set; }
+        public ICommand ShowProductSearchCommand { get; set; }
 
         public ProductManagementViewModel()
         {
@@ -114,10 +115,11 @@ namespace QuanLyBanHang.ViewModels
             DeleteProductCommand = new RelayCommand(DeleteProduct);
             SaveProductCommand = new RelayCommand(SaveProduct);
             FilterProductsCommand = new RelayCommand(_ => FilterProducts(null));
-
             // Mặc định hiển thị danh sách sản phẩm
             ShowProductList(null);
         }
+
+
 
         public void ShowProductList(object obj)
         {

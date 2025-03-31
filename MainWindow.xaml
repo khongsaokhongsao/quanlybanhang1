@@ -95,7 +95,8 @@
                         <Button Content="🔄Thêm nhà sản xuất" Style="{StaticResource MenuButtonStyle}" FontSize="14"
                                 Command="{Binding OpenManufacturerFormCommand}"/>
                         <Button Content="🗂️Quản lý loại sản phẩm" Style="{StaticResource MenuButtonStyle}" FontSize="14"/>
-                        <Button Content="🔍Tìm kiếm sản phẩm" Style="{StaticResource MenuButtonStyle}" FontSize="14"/>
+                        <Button Content="🔍Tìm kiếm sản phẩm" Style="{StaticResource MenuButtonStyle}" FontSize="14"
+                                Command="{Binding ShowTimkiemsanphamViewCommand}" />
                     </StackPanel>
                 </StackPanel>
 
@@ -145,7 +146,8 @@
                         <Button Content="➕📦Nhập kho" Style="{StaticResource MenuButtonStyle}" FontSize="14" Command="{Binding ShowImportCreateCommand}" />
                         <Button Content="⚙️📦 Xem danh sách tạo thành sản phẩm"  Style="{StaticResource MenuButtonStyle}" FontSize="14" 
                                 Command="{Binding ShowDanhmuctaothanhsanphamCommand}" />
-                        <Button Content="📊Tồn kho" Style="{StaticResource MenuButtonStyle}" FontSize="14"/>
+                        <Button Content="📊Tồn kho" Style="{StaticResource MenuButtonStyle}" FontSize="14"
+                                Command="{Binding ShowTonKhoCommand}"/>
                         <Button Content="✅📦Kiểm kho" Style="{StaticResource MenuButtonStyle}" FontSize="14"/>
                         <Button Content="🔁Chuyển kho" Style="{StaticResource MenuButtonStyle}" FontSize="14"/>
                         <Button Content="🔧📦Chuyển kho bảo hành" Style="{StaticResource MenuButtonStyle}" FontSize="14"/>
