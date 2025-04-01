@@ -49,7 +49,7 @@ namespace QuanLyBanHang.ViewModels
 
 
 
-
+        public ManufacturerListViewModel ManufacturerListViewModel { get; set; }
         public ObservableCollection<UserModel> Users { get; set; }
 
         private UserManagementView userManagementView;
@@ -94,6 +94,11 @@ namespace QuanLyBanHang.ViewModels
             {
                 DataContext = _manufacturerListViewModel
             };
+            // Khởi tạo ManufacturerListViewModel
+            ManufacturerListViewModel = new ManufacturerListViewModel(this);
+
+            // Mặc định hiển thị danh sách nhà sản xuất
+            CurrentView = ManufacturerListViewModel.CurrentView;
 
             // Khởi tạo các Command
             //OpenManufacturerFormCommand = new RelayCommand(OpenManufacturerForm);
@@ -101,7 +106,7 @@ namespace QuanLyBanHang.ViewModels
             ShowHomeCommand = new RelayCommand(ShowHome);
             ShowProductListCommand = new RelayCommand(ShowProductList);
             AddProductCommand = new RelayCommand(AddProduct);
-            ShowManufacturerListCommand = new RelayCommand(ShowManufacturerList);
+            ShowManufacturerListCommand = new RelayCommand(_ => CurrentView = ManufacturerListViewModel.CurrentView);
             AddManufacturerCommand = new RelayCommand(AddManufacturer); // Thêm command mới
 
             ShowCategoryListCommand = new RelayCommand(ShowCategoryList);

@@ -16,6 +16,7 @@ namespace QuanLyBanHang.ViewModels
         private object _currentView;
         private ManufacturerModel _selectedManufacturer;
         private readonly ManufacturerRepository _manufacturerRepository;
+        private readonly MainViewModel _mainViewModel;
 
         public object CurrentView
         {
@@ -24,6 +25,11 @@ namespace QuanLyBanHang.ViewModels
             {
                 _currentView = value;
                 OnPropertyChanged(nameof(CurrentView));
+                // Cập nhật CurrentView của MainViewModel
+                if (_mainViewModel != null)
+                {
+                    _mainViewModel.CurrentView = _currentView;
+                }
             }
         }
 
@@ -70,14 +76,12 @@ namespace QuanLyBanHang.ViewModels
         public ICommand SaveManufacturerCommand { get; set; }
         public ICommand FilterManufacturersCommand { get; set; }
 
-        public ManufacturerListViewModel()
+        public ManufacturerListViewModel(MainViewModel mainViewModel = null)
         {
+            _mainViewModel = mainViewModel;
             _manufacturerRepository = new ManufacturerRepository();
-
-            // Khởi tạo danh sách nhà sản xuất từ cơ sở dữ liệu
             Manufacturers = new ObservableCollection<ManufacturerModel>(_manufacturerRepository.GetAllManufacturers());
 
-            // Khởi tạo các command
             ShowManufacturerListCommand = new RelayCommand(ShowManufacturerList);
             AddManufacturerCommand = new RelayCommand(AddManufacturer);
             EditManufacturerCommand = new RelayCommand(EditManufacturer);
@@ -85,9 +89,6 @@ namespace QuanLyBanHang.ViewModels
             SaveManufacturerCommand = new RelayCommand(SaveManufacturer);
             FilterManufacturersCommand = new RelayCommand(_ => FilterManufacturers(null));
 
-            Console.WriteLine("EditManufacturerCommand initialized"); // Kiểm tra command có được khởi tạo không
-
-            // Mặc định hiển thị danh sách nhà sản xuất
             ShowManufacturerList(null);
         }
 

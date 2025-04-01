@@ -22,8 +22,8 @@ namespace QuanLyBanHang
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = new ManufacturerListViewModel();
-
+            this.DataContext = new MainViewModel();
+          
         }
         
         private void ToggleProductMenu_Click(object sender, RoutedEventArgs e)

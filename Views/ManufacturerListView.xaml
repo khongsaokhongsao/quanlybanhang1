@@ -32,6 +32,8 @@
             <!-- Nút lọc -->
             <Button Content="Tìm kiếm" Command="{Binding FilterManufacturersCommand}" Margin="5"
                     Background="Green" Foreground="White" Padding="5"/>
+            <Button Content="🔁 Load" Command="{Binding ShowManufacturerListCommand}" Margin="5"
+        Background="Blue" Foreground="White" Padding="5"/>
         </StackPanel>
 
         <!-- Danh sách nhà sản xuất -->
