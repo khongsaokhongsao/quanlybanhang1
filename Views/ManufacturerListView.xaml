@@ -52,8 +52,10 @@
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                <Button Content="✍️Sửa" Command="{Binding DataContext.EditManufacturerCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" 
-                                        CommandParameter="{Binding }" Margin="5,0" Padding="5"
+                                <Button Content="✍️Sửa" 
+                                        Command="{Binding DataContext.EditManufacturerCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" 
+                                        CommandParameter="{Binding}" 
+                                        Margin="5,0" Padding="5"
                                         Background="Green" Foreground="White"/>
                                 <Button Content="🗑️Xóa" Command="{Binding DataContext.DeleteManufacturerCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" 
                                         CommandParameter="{Binding }" Margin="5,0" Padding="5"

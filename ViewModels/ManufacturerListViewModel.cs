@@ -85,6 +85,8 @@ namespace QuanLyBanHang.ViewModels
             SaveManufacturerCommand = new RelayCommand(SaveManufacturer);
             FilterManufacturersCommand = new RelayCommand(_ => FilterManufacturers(null));
 
+            Console.WriteLine("EditManufacturerCommand initialized"); // Kiểm tra command có được khởi tạo không
+
             // Mặc định hiển thị danh sách nhà sản xuất
             ShowManufacturerList(null);
         }
@@ -115,7 +117,7 @@ namespace QuanLyBanHang.ViewModels
 
         public void EditManufacturer(object obj)
         {
-            if (obj is ManufacturerModel manufacturer)
+            if (obj is ManufacturerModel manufacturer) // Kiểm tra obj là ManufacturerModel
             {
                 Manufacturer = new ManufacturerModel
                 {
@@ -131,6 +133,10 @@ namespace QuanLyBanHang.ViewModels
                 CurrentView = manufacturerFormView;
             }
         }
+        //public void EditManufacturer(object obj)
+        //{
+        //    MessageBox.Show("Nút Sửa được nhấn!", "Test", MessageBoxButton.OK, MessageBoxImage.Information);
+        //}
 
         public void DeleteManufacturer(object obj)
         {
