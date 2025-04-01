@@ -8,10 +8,12 @@ namespace QuanLyBanHang.Models
 {
     public class Import
     {
+
         public int Id { get; set; }
         public string ProductName { get; set; }
         public int Quantity { get; set; }
-        public DateTime ImportDate { get; set; }
+        public string ImportDate { get; set; }
         public string Supplier { get; set; }
+        
     }
 }

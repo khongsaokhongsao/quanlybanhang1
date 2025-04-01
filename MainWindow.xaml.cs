@@ -23,7 +23,9 @@ namespace QuanLyBanHang
         {
             InitializeComponent();
             this.DataContext = new MainViewModel();
+          
         }
+        
         private void ToggleProductMenu_Click(object sender, RoutedEventArgs e)
         {
             if (ProductSubMenu.Visibility == Visibility.Visible)

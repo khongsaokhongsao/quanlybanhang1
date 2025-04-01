@@ -8,6 +8,9 @@
         mc:Ignorable="d"
         Title="Quản lý bán hàng" Height="720" Width="1280">
     <!-- ✅ Gắn ViewModel -->
+    <!--<Window.DataContext>
+        <vm:MainViewModel />
+    </Window.DataContext>-->
 
 
     <!-- ✅ Định nghĩa Resource -->
@@ -67,6 +70,7 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
+        <ContentControl Content="{Binding CurrentView}"/>
         <!-- ✅ Sidebar -->
         <ScrollViewer Grid.Column="0" VerticalScrollBarVisibility="Auto">
             <StackPanel Background="#2c3e50" Width="300" RenderTransformOrigin="0.754,0.5">
@@ -100,9 +104,12 @@
                                 Command="{Binding ShowManufacturerListCommand}" Margin="5"/>
 
                         <Button Content="🔄Thêm nhà sản xuất" Style="{StaticResource MenuButtonStyle}" FontSize="14"
-                                Command="{Binding OpenManufacturerFormCommand}"/>
-                        <Button Content="🗂️Quản lý loại sản phẩm" Style="{StaticResource MenuButtonStyle}" FontSize="14"/>
-                        <Button Content="🔍Tìm kiếm sản phẩm" Style="{StaticResource MenuButtonStyle}" FontSize="14"/>
+                                Command="{Binding AddManufacturerCommand}"/>
+                        
+                        <Button Content="🗂️Quản lý loại sản phẩm" Style="{StaticResource MenuButtonStyle}" FontSize="14"
+                                Command="{Binding ShowCategoryListCommand}"/>
+                        <Button Content="🔍Tìm kiếm sản phẩm" Style="{StaticResource MenuButtonStyle}" FontSize="14"
+                                Command="{Binding ShowTimkiemsanphamViewCommand}"/>
                     </StackPanel>
                 </StackPanel>
                
@@ -151,8 +158,10 @@
 
                     <!-- Menu con: mặc định ẩn -->
                     <StackPanel x:Name="WarehouseSubMenu" Visibility="Collapsed" Margin="25 0 0 0">
-                        <Button Content="📥Xem danh sách nhập kho" Style="{StaticResource MenuButtonStyle}" FontSize="14" Command="{Binding ShowImportListCommand}" />
-                        <Button Content="➕📦Nhập kho" Style="{StaticResource MenuButtonStyle}" FontSize="14" Command="{Binding ShowImportCreateCommand}" />
+                        <Button Content="📥Xem danh sách nhập kho" Style="{StaticResource MenuButtonStyle}" FontSize="14" 
+                                Command="{Binding ShowImportListCommand}" />
+                        <Button Content="➕📦Nhập kho" Style="{StaticResource MenuButtonStyle}" FontSize="14" 
+                                Command="{Binding ShowImportCreateCommand}" />
                         <Button Content="⚙️📦 Xem danh sách tạo thành sản phẩm"  Style="{StaticResource MenuButtonStyle}" FontSize="14" 
                                 Command="{Binding ShowDanhmuctaothanhsanphamCommand}" />
                         <Button Content="📊Tồn kho" Style="{StaticResource MenuButtonStyle}" FontSize="14"

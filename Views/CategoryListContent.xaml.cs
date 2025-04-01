@@ -12,21 +12,17 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using QuanLyBanHang.ViewModels;
 
 namespace QuanLyBanHang.Views
 {
     /// <summary>
-    /// Interaction logic for ManufacturerFormView.xaml
+    /// Interaction logic for CategoryListContent.xaml
     /// </summary>
-    public partial class ManufacturerFormView : UserControl
+    public partial class CategoryListContent : UserControl
     {
-        public ManufacturerFormView()
+        public CategoryListContent()
         {
             InitializeComponent();
-            //DataContext = new ManufacturerFormViewModel((manufacturer) => { });
-
         }
-
     }
 }
