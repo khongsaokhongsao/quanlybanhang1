@@ -216,7 +216,6 @@
 
                     <StackPanel x:Name="WarrantySubMenu" Visibility="Collapsed" Margin="25 0 0 0">
                         <Button Content="📦Xem tồn kho bảo hành" Style="{StaticResource MenuButtonStyle}" Command="{Binding OpenTonKhoBHCommand}" FontSize="14"/>
-
                         <Button Content="📥Xem danh sách nhận bảo hành" Style="{StaticResource MenuButtonStyle}" Command="{Binding OpenDanhSachNhanBHCommand}" FontSize="14"/>
                         <Button Content="📤Xem danh sách gửi bảo hành" Style="{StaticResource MenuButtonStyle}" Command="{Binding OpenDanhSachGuiBHCommand}" FontSize="14"/>
                         <Button Content="✅Xem danh sách trả bảo hành" Style="{StaticResource MenuButtonStyle}" Command="{Binding OpenDanhSachTraBHCommand}" FontSize="14"/>
