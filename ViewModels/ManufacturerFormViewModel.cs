@@ -3,12 +3,15 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using System.Collections.ObjectModel;
+using QuanLyBanHang.Helpers;
+using QuanLyBanHang.Models;
 
 namespace QuanLyBanHang.ViewModels
 {
     public class ManufacturerFormViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
+        private static int _nextId = 3;
 
         private string _id;
         public string Id
@@ -38,25 +41,54 @@ namespace QuanLyBanHang.ViewModels
             set { _phoneNumber = value; OnPropertyChanged(); }
         }
 
-        public ObservableCollection<Manufacturer> ManufacturerList { get; set; }
-
         public ICommand SaveCommand { get; }
 
-        public ManufacturerFormViewModel()
+        private readonly Action<ManufacturerModel> _onSavedCallback;
+
+        public ManufacturerFormViewModel(Action<ManufacturerModel> onSavedCallback)
         {
-            ManufacturerList = new ObservableCollection<Manufacturer>();
+            _onSavedCallback = onSavedCallback;
             SaveCommand = new RelayCommand(SaveManufacturer);
         }
 
         private void SaveManufacturer(object obj)
         {
-            ManufacturerList.Add(new Manufacturer
+            // Kiểm tra hợp lệ
+            if (string.IsNullOrWhiteSpace(Name))
             {
-                Id = this.Id,
+                ShowError("Vui lòng nhập tên nhà sản xuất.");
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(Address))
+            {
+                ShowError("Vui lòng nhập địa chỉ.");
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(PhoneNumber))
+            {
+                ShowError("Vui lòng nhập số điện thoại.");
+                return;
+            }
+
+            if (!PhoneNumber.All(char.IsDigit))
+            {
+                ShowError("Số điện thoại chỉ được chứa chữ số.");
+                return;
+            }
+
+            // Nếu hợp lệ thì tạo đối tượng mới và lưu
+            var newManufacturer = new ManufacturerModel
+            {
+                Id = _nextId.ToString(),
                 Name = this.Name,
                 Address = this.Address,
                 PhoneNumber = this.PhoneNumber
-            });
+            };
+            _nextId++;
+
+            _onSavedCallback?.Invoke(newManufacturer);
 
             // Reset form
             Id = string.Empty;
@@ -64,34 +96,15 @@ namespace QuanLyBanHang.ViewModels
             Address = string.Empty;
             PhoneNumber = string.Empty;
         }
+        private void ShowError(string message)
+        {
+            System.Windows.MessageBox.Show(message, "Lỗi", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Warning);
+        }
+
 
         private void OnPropertyChanged([CallerMemberName] string prop = "")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
         }
     }
-
-    public class Manufacturer
-    {
-        public string Id { get; set; }
-        public string Name { get; set; }
-        public string Address { get; set; }
-        public string PhoneNumber { get; set; }
     }
-
-    public class RelayCommand : ICommand
-    {
-        private readonly Action<object> _execute;
-        private readonly Predicate<object> _canExecute;
-
-        public RelayCommand(Action<object> execute, Predicate<object> canExecute = null)
-        {
-            this._execute = execute;
-            this._canExecute = canExecute;
-        }
-
-        public bool CanExecute(object parameter) => _canExecute == null || _canExecute(parameter);
-        public event EventHandler CanExecuteChanged { add { } remove { } }
-        public void Execute(object parameter) => _execute(parameter);
-    }
-}

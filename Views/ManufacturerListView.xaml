@@ -21,7 +21,7 @@
                 <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="Auto"/>
                 <DataGridTextColumn Header="Tên" Binding="{Binding Name}" Width="*"/>
                 <DataGridTextColumn Header="Địa chỉ" Binding="{Binding Address}" Width="*"/>
-                <DataGridTextColumn Header="SĐT" Binding="{Binding Phone}" Width="Auto"/>
+                <DataGridTextColumn Header="SĐT" Binding="{Binding PhoneNumber}" Width="Auto"/>
 
                 <DataGridTemplateColumn Header="Hành động" Width="150">
                     <DataGridTemplateColumn.CellTemplate>

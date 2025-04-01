@@ -1,23 +1,24 @@
-﻿<UserControl x:Class="QuanLyBanHang.Views.ProductFormView"
+﻿<UserControl x:Class="QuanLyBanHang.Views.ImportCreateView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
              d:DesignHeight="980" d:DesignWidth="720">
+
     <UserControl.Resources>
-        <!-- Style cho Button với CornerRadius -->
+        <!-- Style cho Button KHÔNG bo góc -->
         <Style x:Key="RoundedButtonStyle" TargetType="Button">
             <Setter Property="Background" Value="DodgerBlue"/>
             <Setter Property="Foreground" Value="White"/>
             <Setter Property="FontWeight" Value="Bold"/>
-            <Setter Property="Width" Value="120"/>
+            <Setter Property="Width" Value="150"/>
             <Setter Property="Height" Value="40"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
                         <Border Background="{TemplateBinding Background}" 
-                                CornerRadius="5" 
+                                CornerRadius="0" 
                                 BorderThickness="1" 
                                 BorderBrush="{TemplateBinding BorderBrush}">
                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
@@ -36,8 +37,7 @@
         </Style>
     </UserControl.Resources>
 
-    <Border Padding="20" CornerRadius="10" Background="White" 
-            BorderBrush="Gray" BorderThickness="1" Effect="{DynamicResource DropShadow}">
+    <Border Padding="20" CornerRadius="0" Background="White" BorderBrush="Gray" BorderThickness="1">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
@@ -46,48 +46,30 @@
             </Grid.RowDefinitions>
 
             <!-- Tiêu đề -->
-            <TextBlock Text="Thêm sản phẩm" FontSize="22" FontWeight="Bold" 
+            <TextBlock Text="Thêm phiếu nhập hàng" FontSize="22" FontWeight="Bold" 
                        Foreground="Black" HorizontalAlignment="Center" Margin="0 10"/>
 
             <!-- Nội dung Form -->
             <StackPanel Grid.Row="1" Margin="0 10">
-                <!-- Tên sản phẩm -->
                 <GroupBox Header="Tên sản phẩm" Margin="0 5" Height="53">
-                    <TextBox Text="{Binding Product.Name, UpdateSourceTrigger=PropertyChanged}" TextChanged="TextBox_TextChanged" Margin="5,0,2,0"/>
+                    <TextBox Text="{Binding NewImport.ProductName, UpdateSourceTrigger=PropertyChanged}" Margin="5,0,2,0"/>
                 </GroupBox>
 
-                <!-- Danh mục -->
-                <GroupBox Header="Danh mục" Margin="0 5" Height="53">
-                    <ComboBox ItemsSource="{Binding Categories}" 
-                              SelectedValue="{Binding Product.CategoryId}" 
-                              DisplayMemberPath="Name" 
-                              SelectedValuePath="Id" Margin="4,0,2,0"/>
+                <GroupBox Header="Số lượng" Margin="0 5" Height="53">
+                    <TextBox Text="{Binding NewImport.Quantity, UpdateSourceTrigger=PropertyChanged}" Margin="5,0,2,0"/>
                 </GroupBox>
 
-                <!-- Giá bán -->
-                <GroupBox Header="Giá bán" Margin="0 5" Height="53">
-                    <TextBox Text="{Binding Product.Price, UpdateSourceTrigger=PropertyChanged}" Margin="4,0,4,0" TextChanged="TextBox_TextChanged_1"/>
+                <GroupBox Header="Nhà cung cấp" Margin="0 5" Height="53">
+                    <TextBox Text="{Binding NewImport.Supplier, UpdateSourceTrigger=PropertyChanged}" Margin="5,0,2,0"/>
                 </GroupBox>
 
-                <!-- Tồn kho -->
-                <GroupBox Header="Tồn kho" Margin="0 5" Height="53">
-                    <TextBox Text="{Binding Product.Stock, UpdateSourceTrigger=PropertyChanged}" Margin="5,0,3,0"/>
-                </GroupBox>
-
-                <!-- Trạng thái -->
-                <GroupBox Header="Trạng thái" Margin="0 5" Height="53">
-                    <ComboBox ItemsSource="{Binding RelativeSource={RelativeSource Self}}"
-                              SelectedValue="{Binding Product.IsActive}"
-                              SelectedValuePath="Tag"
-                              Margin="5,0,4,0">
-                        <ComboBoxItem Content="Active" Tag="True"/>
-                        <ComboBoxItem Content="Inactive" Tag="False"/>
-                    </ComboBox>
+                <GroupBox Header="Ngày nhập" Margin="0 5" Height="53">
+                    <DatePicker SelectedDate="{Binding NewImport.ImportDate}" Margin="5,0,2,0"/>
                 </GroupBox>
             </StackPanel>
 
             <!-- Nút lưu -->
-            <Button Grid.Row="2" Content="Lưu" Command="{Binding SaveProductCommand}" 
+            <Button Grid.Row="2" Content="Lưu phiếu nhập" Command="{Binding SaveCommand}" 
                     Style="{StaticResource RoundedButtonStyle}"
                     HorizontalAlignment="Center" Margin="0 20"/>
         </Grid>

@@ -32,6 +32,11 @@ namespace QuanLyBanHang.ViewModels
         public ICommand ShowCategoryListCommand { get; }
         public ICommand ShowProductListForManagementCommand { get; }
         public ICommand AddProductForManagementCommand { get; }
+        public ICommand ShowImportCreateCommand { get; }
+        public ICommand ShowImportListCommand { get; }
+        public ICommand ShowDanhmuctaothanhsanphamCommand { get; set; }
+        public ICommand ShowTonKhoCommand { get; set; }
+
         public ICommand OpenManufacturerFormCommand { get; }
         public ICommand OpenTonKhoBHCommand { get; }
         public ICommand OpenDanhSachNhanBHCommand { get; }
@@ -40,16 +45,22 @@ namespace QuanLyBanHang.ViewModels
         public ICommand OpenQuanLyChuyenKhoBanCommand { get; }
         public ICommand OpenQuanLyChuyenKhoHuyCommand { get; }
         public ICommand OpenQuanLyChuyenKhoSuDungCommand { get; }
+      
 
 
         public ObservableCollection<UserModel> Users { get; set; }
 
         private UserManagementView userManagementView;
         private UserManagementViewModel userManagementViewModel;
+        private ImportListView _importListView;
+        private ImportListViewModel _importListViewModel;
+
         private ProductManagementView _productManagementView;
         private ProductManagementViewModel _productManagementViewModel;
         private ManufacturerListView _manufacturerListView;
         private ManufacturerListViewModel _manufacturerListViewModel;
+        private ManufacturerFormViewModel _manufacturerFormViewModel;
+        private ManufacturerFormView _manufacturerFormView;
         private TonKhoBHView _tonKhoBHView;
         private TonKhoBHViewModel _tonKhoBHViewModel;
         private DanhSachNhanBHView _danhSachNhanBHView;
@@ -64,6 +75,11 @@ namespace QuanLyBanHang.ViewModels
         private QuanLyChuyenKhoHuyViewModel _quanLyChuyenKhoHuyViewModel;
         private ChuyenKhoSuDungView _quanLyChuyenKhoSuDungView;
         private QuanLyChuyenKhoViewModel _quanLyChuyenKhoSuDungViewModel;
+        private DanhmuctaothanhsanphamView _danhmuctaothanhsanphamView;
+        private DanhmuctaothanhsanphamViewModel _danhmuctaothanhsanphamViewModel;
+        private TonKhoView _tonKhoView;
+        private TonKhoViewModel _tonkhoViewModel;
+
 
 
         public MainViewModel()
@@ -84,12 +100,28 @@ namespace QuanLyBanHang.ViewModels
             ShowProductListCommand = new RelayCommand(ShowProductList);
             AddProductCommand = new RelayCommand(AddProduct);
             ShowManufacturerListCommand = new RelayCommand(ShowManufacturerList);
+            ShowImportListCommand = new RelayCommand(_ => ShowImportList());
+            ShowImportCreateCommand = new RelayCommand(_ => ShowImportCreate());
             ShowCategoryListCommand = new RelayCommand(ShowCategoryList);
             ShowProductListForManagementCommand = new RelayCommand(ShowProductListForManagement);
             AddProductForManagementCommand = new RelayCommand(AddProductForManagement);
+            ShowDanhmuctaothanhsanphamCommand = new RelayCommand(ShowDanhmuctaothanhsanpham);
+            ShowTonKhoCommand = new RelayCommand(ShowTonKho);
 
             Users = new ObservableCollection<UserModel>();
             CurrentView = new WelcomeView(); // Giao diện mặc định
+        }
+        private void OpenManufacturerForm(object obj)
+        {
+            var viewModel = new ManufacturerFormViewModel(OnManufacturerSaved);
+            CurrentView = new ManufacturerFormView { DataContext = viewModel };
+        }
+
+        private void OnManufacturerSaved(ManufacturerModel newManufacturer)
+        {
+            var viewModel = new ManufacturerListViewModel();
+            viewModel.Manufacturers.Add(newManufacturer);
+            CurrentView = new ManufacturerListView { DataContext = viewModel };
         }
 
         private void OpenTonKhoBH()
@@ -177,11 +209,16 @@ namespace QuanLyBanHang.ViewModels
         private void ShowProductList(object obj)
         {
             throw new NotImplementedException("Chức năng Quản lý nhập hàng chưa được triển khai.");
+            CurrentView = _productManagementView;
+            _productManagementViewModel.ShowProductList(null);
+
         }
 
         private void AddProduct(object obj)
         {
             throw new NotImplementedException("Chức năng Quản lý nhập hàng chưa được triển khai.");
+            CurrentView = _productManagementView;
+            _productManagementViewModel.AddProduct(null);
         }
 
         private void ShowManufacturerList(object obj)
@@ -211,16 +248,56 @@ namespace QuanLyBanHang.ViewModels
             _productManagementViewModel.AddProduct(null);
         }
 
-        private void OpenManufacturerForm(object obj)
-        {
-            var view = new ManufacturerFormView { DataContext = new ManufacturerFormViewModel() };
-            CurrentView = view;
-        }
+      
 
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
+        private void ShowDanhmuctaothanhsanpham(object obj)
+        {
+            if (_danhmuctaothanhsanphamView == null)
+            {
+                _danhmuctaothanhsanphamViewModel = new DanhmuctaothanhsanphamViewModel();
+                _danhmuctaothanhsanphamView = new DanhmuctaothanhsanphamView
+                {
+                    DataContext = _danhmuctaothanhsanphamViewModel
+                };
+            }
+            CurrentView = _danhmuctaothanhsanphamView;
+        }
+        private void ShowTonKho(object obj)
+        {
+            if (_tonKhoView == null)
+            {
+                _tonkhoViewModel = new TonKhoViewModel();
+                _tonKhoView = new TonKhoView
+                {
+                    DataContext = _tonkhoViewModel
+                };
+            }
+            CurrentView = _tonKhoView;
+        }
+        private void ShowImportList()
+        {
+            if (_importListView == null)
+            {
+                _importListViewModel = new ImportListViewModel();
+                _importListView = new ImportListView
+                {
+                    DataContext = _importListViewModel
+                };
+            }
+
+            CurrentView = _importListView;
+        }
+
+        private void ShowImportCreate()
+        {
+            CurrentView = new ImportCreateView();
+        }
+
     }
 }
