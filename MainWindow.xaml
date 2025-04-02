@@ -190,6 +190,7 @@
                     <!-- Menu con: mặc định ẩn -->
                     <StackPanel x:Name="FundSubMenu" Visibility="Collapsed" Margin="25 0 0 0">
                         <Button Content="🧾Danh sách tài khoản" Style="{StaticResource MenuButtonStyle}" FontSize="14"/>
+
                         <Button Content="➕💳Thêm tài khoản mới" Style="{StaticResource MenuButtonStyle}" FontSize="14"/>
                         <Button Content="💵Nhập quỹ đầu kỳ" Style="{StaticResource MenuButtonStyle}" FontSize="14"/>
                         <Button Content="🔁Danh sách giao dịch tài khoản" Style="{StaticResource MenuButtonStyle}" FontSize="14"/>
