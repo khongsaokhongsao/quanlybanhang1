@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
+    <Grid Background="#f4f4f9">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -13,55 +13,57 @@
         </Grid.RowDefinitions>
 
         <!-- Tiêu đề và nút thêm -->
-        <StackPanel Orientation="Horizontal" Margin="10">
-            <TextBlock Text="Danh sách nhà sản xuất" FontSize="24" FontWeight="Bold"/>
+        <StackPanel Orientation="Horizontal" Margin="20">
+            <TextBlock Text="Danh sách nhà sản xuất" FontSize="26" FontWeight="Bold" Foreground="#333" VerticalAlignment="Center"/>
         </StackPanel>
 
         <!-- Bộ lọc -->
-        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="10">
-            <!-- Lọc theo tên -->
-            <GroupBox Header="Tên nhà sản xuất" Margin="5">
-                <TextBox Width="150" Text="{Binding SearchName, UpdateSourceTrigger=PropertyChanged}" Margin="5"/>
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="20" VerticalAlignment="Center">
+            <GroupBox Header="Tên nhà sản xuất" Margin="10" Padding="10" Background="#ffffff" BorderBrush="#d1d1d6">
+                <TextBox Width="180" Text="{Binding SearchName, UpdateSourceTrigger=PropertyChanged}" Margin="5" Padding="5"/>
             </GroupBox>
 
-            <!-- Lọc theo số điện thoại -->
-            <GroupBox Header="Số điện thoại" Margin="5">
-                <TextBox Width="150" Text="{Binding SearchPhone, UpdateSourceTrigger=PropertyChanged}" Margin="5"/>
+            <GroupBox Header="Số điện thoại" Margin="10" Padding="10" Background="#ffffff" BorderBrush="#d1d1d6">
+                <TextBox Width="180" Text="{Binding SearchPhone, UpdateSourceTrigger=PropertyChanged}" Margin="5" Padding="5"/>
             </GroupBox>
 
-            <!-- Nút lọc -->
-            <Button Content="Tìm kiếm" Command="{Binding FilterManufacturersCommand}" Margin="5"
-                    Background="Green" Foreground="White" Padding="5"/>
-            <Button Content="🔁 Load" Command="{Binding ShowManufacturerListCommand}" Margin="5"
-        Background="Blue" Foreground="White" Padding="5"/>
+            <Button Content="Tìm kiếm" Command="{Binding FilterManufacturersCommand}" Margin="5" Background="#5e9c56" Foreground="White" Padding="10,5" BorderBrush="#4a7a40" BorderThickness="1" Height="41" />
+            <Button Content="🔁 Load" Command="{Binding ShowManufacturerListCommand}" Margin="5" Background="#4c87e0" Foreground="White" Padding="10,5" BorderBrush="#4075c0" BorderThickness="1" Height="40" />
         </StackPanel>
 
         <!-- Danh sách nhà sản xuất -->
-        <DataGrid Grid.Row="2"
-                  ItemsSource="{Binding Manufacturers}"
-                  SelectedItem="{Binding SelectedManufacturer}"
-                  AutoGenerateColumns="False"
-                  IsReadOnly="True"
-                  CanUserAddRows="False"
-                  CanUserDeleteRows="False"
-                  Margin="10">
+        <DataGrid Grid.Row="2" 
+                  ItemsSource="{Binding Manufacturers}" 
+                  SelectedItem="{Binding SelectedManufacturer}" 
+                  AutoGenerateColumns="False" 
+                  IsReadOnly="True" 
+                  CanUserAddRows="False" 
+                  CanUserDeleteRows="False" 
+                  Margin="20" 
+                  Background="White" 
+                  BorderBrush="#d1d1d6" BorderThickness="1" 
+                  AlternatingRowBackground="#f9f9f9">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="50"/>
-                <DataGridTextColumn Header="Tên nhà sản xuất" Binding="{Binding Name}" Width="*"/>
-                <DataGridTextColumn Header="Địa chỉ" Binding="{Binding Address}" Width="*"/>
-                <DataGridTextColumn Header="Số điện thoại" Binding="{Binding Phone}" Width="*"/>
+                <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="60" IsReadOnly="True" />
+                <DataGridTextColumn Header="Tên nhà sản xuất" Binding="{Binding Name}" Width="*" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Địa chỉ" Binding="{Binding Address}" Width="*" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Số điện thoại" Binding="{Binding Phone}" Width="*" IsReadOnly="True"/>
                 <DataGridTemplateColumn Header="Hành động" Width="150">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                <Button Content="✍️Sửa" 
+                                <Button Content="✍️ Sửa" 
                                         Command="{Binding DataContext.EditManufacturerCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" 
                                         CommandParameter="{Binding}" 
-                                        Margin="5,0" Padding="5"
-                                        Background="Green" Foreground="White"/>
-                                <Button Content="🗑️Xóa" Command="{Binding DataContext.DeleteManufacturerCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" 
-                                        CommandParameter="{Binding }" Margin="5,0" Padding="5"
-                                        Background="Red" Foreground="White"/>
+                                        Margin="5,0" Padding="8,5" 
+                                        Background="#5e9c56" Foreground="White" 
+                                        BorderBrush="#4a7a40" BorderThickness="1"/>
+                                <Button Content="🗑️ Xóa" 
+                                        Command="{Binding DataContext.DeleteManufacturerCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" 
+                                        CommandParameter="{Binding}" 
+                                        Margin="5,0" Padding="8,5" 
+                                        Background="#e04b46" Foreground="White" 
+                                        BorderBrush="#c54034" BorderThickness="1"/>
                             </StackPanel>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
