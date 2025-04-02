@@ -128,7 +128,8 @@
                         <Button Content="📦Xem danh sách hàng hóa" Style="{StaticResource MenuButtonStyle}" FontSize="14"
                                 Command="{Binding ShowDanhSachHangHoaViewCommand}"/>
                         <Button Content="➕Thêm hàng hóa" Style="{StaticResource MenuButtonStyle}" FontSize="14"/>
-                        <Button Content="🏭Danh sách nhà sản xuất" Style="{StaticResource MenuButtonStyle}" FontSize="14"/>
+                        <Button Content="🏭Danh sách nhà sản xuất" Style="{StaticResource MenuButtonStyle}" FontSize="14"
+                                Command="{Binding ShowManufacturerListCommand}"/>
                         <Button Content="🗂️Danh mục hàng hóa" Style="{StaticResource MenuButtonStyle}" FontSize="14"/>
                     </StackPanel>
                 </StackPanel>
