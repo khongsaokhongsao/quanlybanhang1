@@ -1,0 +1,34 @@
+﻿<UserControl x:Class="QuanLyBanHang.Views.TonKhoBHView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:QuanLyBanHang.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <StackPanel Orientation="Vertical" Margin="10">
+            <TextBlock Text="Tồn Kho Bảo Hành" FontSize="20" FontWeight="Bold" Foreground="Black" />
+            
+
+            <!-- Bảng danh sách sản phẩm bảo hành -->
+            <DataGrid x:Name="TonKhoBHDataGrid" AutoGenerateColumns="False" Height="300">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Mã SP" Binding="{Binding MaSanPham}" Width="100"/>
+                    <DataGridTextColumn Header="Tên SP" Binding="{Binding TenSanPham}" Width="200"/>
+                    <DataGridTextColumn Header="Số lượng" Binding="{Binding SoLuong}" Width="100"/>
+                    <DataGridTextColumn Header="Tình trạng" Binding="{Binding TinhTrang}" Width="200"/>
+                    <DataGridTextColumn Header="Ngày nhập" Binding="{Binding NgayNhap}" Width="150"/>
+                    <DataGridTextColumn Header="Ngày hết BH" Binding="{Binding NgayHetBaoHanh}" Width="*"/>
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <!-- Nút thêm/xuất sản phẩm -->
+            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                <Button Content="Thêm danh sách " Width="100" Margin="0,0,10,0"/>
+                <Button Content="Xóa danh sách " Width="100" Margin="0,0,10,0"/>
+                <Button Content="Sửa danh sách " Width="100" Margin="0,0,10,0"/>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</UserControl>

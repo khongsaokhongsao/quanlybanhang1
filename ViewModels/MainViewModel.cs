@@ -42,8 +42,15 @@ namespace QuanLyBanHang.ViewModels
         public ICommand ShowTimkiemsanphamViewCommand { get; set; }
         public ICommand ShowManufacturerListCommand { get; set; }
         public ICommand AddManufacturerCommand { get; set; }
+        public ICommand OpenTonKhoBHCommand { get; }
+        public ICommand OpenDanhSachNhanBHCommand { get; }
+        public ICommand OpenDanhSachGuiBHCommand { get; }
+        public ICommand OpenDanhSachTraBHCommand { get; }
+        public ICommand OpenQuanLyChuyenKhoBanCommand { get; }
+        public ICommand OpenQuanLyChuyenKhoHuyCommand { get; }
+        public ICommand OpenQuanLyChuyenKhoSuDungCommand { get; }
 
-
+        public ICommand ShowDanhSachHangHoaViewCommand { get; set; }
 
 
 
@@ -70,8 +77,23 @@ namespace QuanLyBanHang.ViewModels
         private TimkiemsanphamViewModel _timkiemsanphamViewModel;
         private TonKhoView _tonKhoView;
         private TonKhoViewModel _tonkhoViewModel;
+        private TonKhoBHView _tonKhoBHView;
+        private TonKhoBHViewModel _tonKhoBHViewModel;
+        private DanhSachNhanBHView _danhSachNhanBHView;
+        private DanhSachNhanBHViewModel _danhSachNhanBHViewModel;
+        private DanhSachGuiBH _danhSachGuiBHView;
+        private DanhSachGuiBHViewModel _danhSachGuiBHViewModel;
+        private DanhSachTraBHView _danhSachTraBHView;
+        private DanhSachTraBHViewModel _danhSachTraBHViewModel;
+        private ChuyenKhoBanView _quanLyChuyenKhoBanView;
+        private QuanLyChuyenKhoBanViewModel _quanLyChuyenKhoBanViewModel;
+        private ChuyenKhoHuyView _quanLyChuyenKhoHuyView;
+        private QuanLyChuyenKhoHuyViewModel _quanLyChuyenKhoHuyViewModel;
+        private ChuyenKhoSuDungView _quanLyChuyenKhoSuDungView;
+        private QuanLyChuyenKhoViewModel _quanLyChuyenKhoSuDungViewModel;
 
-
+        private DanhSachHangHoaView _danhSachHangHoaView;
+        private DanhSachHangHoaViewModel _danhSachHangHoaViewModel;
 
 
 
@@ -117,8 +139,16 @@ namespace QuanLyBanHang.ViewModels
             ShowTimkiemsanphamViewCommand = new RelayCommand(ShowTimkiemsanpham);
             ShowImportCreateCommand = new RelayCommand(o => ShowImportCreate());
             ShowImportListCommand = new RelayCommand(o => ShowImportList());
-            
+            /////////////////////////////////////////
+            OpenTonKhoBHCommand = new RelayCommand(o => OpenTonKhoBH());
+            OpenDanhSachNhanBHCommand = new RelayCommand(o => OpenDanhSachNhanBH());
+            OpenDanhSachGuiBHCommand = new RelayCommand(o => OpenDanhSachGuiBH());
+            OpenDanhSachTraBHCommand = new RelayCommand(o => OpenDanhSachTraBH());
+            OpenQuanLyChuyenKhoBanCommand = new RelayCommand(o => OpenQuanLyChuyenKhoBan());
+            OpenQuanLyChuyenKhoHuyCommand = new RelayCommand(o => OpenQuanLyChuyenKhoHuy());
+            OpenQuanLyChuyenKhoSuDungCommand = new RelayCommand(o => OpenQuanLyChuyenKhoSuDung());
 
+            ShowDanhSachHangHoaViewCommand = new RelayCommand(ShowDanhSachHangHoa);
 
 
             // Mặc định hiển thị Home
@@ -166,11 +196,74 @@ namespace QuanLyBanHang.ViewModels
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-
+        private void OpenTonKhoBH()
+        {
+            if (_tonKhoBHView == null)
+            {
+                _tonKhoBHViewModel = new TonKhoBHViewModel();
+                _tonKhoBHView = new TonKhoBHView { DataContext = _tonKhoBHViewModel };
+            }
+            CurrentView = _tonKhoBHView;
+        }
+        private void OpenDanhSachGuiBH()
+        {
+            if (_danhSachGuiBHView == null)
+            {
+                _danhSachGuiBHViewModel = new DanhSachGuiBHViewModel();
+                _danhSachGuiBHView = new DanhSachGuiBH { DataContext = _danhSachGuiBHViewModel };
+            }
+            CurrentView = _danhSachGuiBHView;
+        }
+        private void OpenDanhSachTraBH()
+        {
+            if (_danhSachTraBHView == null)
+            {
+                _danhSachTraBHViewModel = new DanhSachTraBHViewModel();
+                _danhSachTraBHView = new DanhSachTraBHView { DataContext = _danhSachTraBHViewModel };
+            }
+            CurrentView = _danhSachTraBHView;
+        }
+        private void OpenQuanLyChuyenKhoBan()
+        {
+            if (_quanLyChuyenKhoBanView == null)
+            {
+                _quanLyChuyenKhoBanViewModel = new QuanLyChuyenKhoBanViewModel();
+                _quanLyChuyenKhoBanView = new ChuyenKhoBanView { DataContext = _quanLyChuyenKhoBanViewModel };
+            }
+            CurrentView = _quanLyChuyenKhoBanView;
+        }
+        private void OpenDanhSachNhanBH()
+        {
+            if (_danhSachNhanBHView == null)
+            {
+                _danhSachNhanBHViewModel = new DanhSachNhanBHViewModel();
+                _danhSachNhanBHView = new DanhSachNhanBHView { DataContext = _danhSachNhanBHViewModel };
+            }
+            CurrentView = _danhSachNhanBHView;
+        }
+        private void OpenQuanLyChuyenKhoHuy()
+        {
+            if (_quanLyChuyenKhoHuyView == null)
+            {
+                _quanLyChuyenKhoHuyViewModel = new QuanLyChuyenKhoHuyViewModel();
+                _quanLyChuyenKhoHuyView = new ChuyenKhoHuyView { DataContext = _quanLyChuyenKhoHuyViewModel };
+            }
+            CurrentView = _quanLyChuyenKhoHuyView;
+        }
         private void ShowUserManagement(object obj)
         {
             CurrentView = new UserManagementView();
         }
+        private void OpenQuanLyChuyenKhoSuDung()
+        {
+            if (_quanLyChuyenKhoSuDungView == null)
+            {
+                _quanLyChuyenKhoSuDungViewModel = new QuanLyChuyenKhoViewModel();
+                _quanLyChuyenKhoSuDungView = new ChuyenKhoSuDungView { DataContext = _quanLyChuyenKhoSuDungViewModel };
+            }
+            CurrentView = _quanLyChuyenKhoSuDungView;
+        }
+
         private void ShowTimkiemsanpham(object obj)
         {
             if (_timkiemsanphamView == null)
@@ -333,6 +426,19 @@ namespace QuanLyBanHang.ViewModels
 
             _importListViewModel.Imports.Add(newImport);
         }
-        
+
+        private void ShowDanhSachHangHoa(object obj)
+        {
+            if (_danhSachHangHoaView == null)
+            {
+                _danhSachHangHoaViewModel = new DanhSachHangHoaViewModel();
+                _danhSachHangHoaView = new DanhSachHangHoaView
+                {
+                    DataContext = _danhSachHangHoaViewModel
+                };
+            }
+            CurrentView = _danhSachHangHoaView;
+        }
+
     }
 }
