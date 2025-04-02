@@ -7,8 +7,24 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-      <StackPanel Orientation="Vertical" Margin="10">
-        <TextBlock Text="Quản lý Chuyển Kho Bán" FontSize="20" FontWeight="Bold" Foreground="Black" />
+        <!-- Gradient Background -->
+        <Grid.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                <GradientStop Color="#E3F2FD" Offset="0.0" />
+                <GradientStop Color="#BBDEFB" Offset="1.0" />
+            </LinearGradientBrush>
+        </Grid.Background>
+       
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <!-- Hàng chứa tiêu đề -->
+            <RowDefinition Height="*" />
+            <!-- Hàng chứa DataGrid -->
+        </Grid.RowDefinitions>
+
+        
+     <StackPanel Orientation="Vertical" Margin="10">
+            <TextBlock Text="📦 Quản lý Chuyển Kho Bán" FontSize="20" FontWeight="Bold" Foreground="Blue" />
         <DataGrid x:Name="ChuyenKhoDataGrid" AutoGenerateColumns="False" Height="300">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Mã Chuyển Kho" Binding="{Binding MaChuyenKho}" Width="100"/>
