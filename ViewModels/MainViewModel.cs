@@ -50,7 +50,7 @@ namespace QuanLyBanHang.ViewModels
         public ICommand OpenQuanLyChuyenKhoHuyCommand { get; }
         public ICommand OpenQuanLyChuyenKhoSuDungCommand { get; }
 
-
+        public ICommand ShowDanhSachHangHoaViewCommand { get; set; }
 
 
 
@@ -92,7 +92,8 @@ namespace QuanLyBanHang.ViewModels
         private ChuyenKhoSuDungView _quanLyChuyenKhoSuDungView;
         private QuanLyChuyenKhoViewModel _quanLyChuyenKhoSuDungViewModel;
 
-
+        private DanhSachHangHoaView _danhSachHangHoaView;
+        private DanhSachHangHoaViewModel _danhSachHangHoaViewModel;
 
 
 
@@ -147,7 +148,7 @@ namespace QuanLyBanHang.ViewModels
             OpenQuanLyChuyenKhoHuyCommand = new RelayCommand(o => OpenQuanLyChuyenKhoHuy());
             OpenQuanLyChuyenKhoSuDungCommand = new RelayCommand(o => OpenQuanLyChuyenKhoSuDung());
 
-
+            ShowDanhSachHangHoaViewCommand = new RelayCommand(ShowDanhSachHangHoa);
 
 
             // Mặc định hiển thị Home
@@ -424,6 +425,19 @@ namespace QuanLyBanHang.ViewModels
             }
 
             _importListViewModel.Imports.Add(newImport);
+        }
+
+        private void ShowDanhSachHangHoa(object obj)
+        {
+            if (_danhSachHangHoaView == null)
+            {
+                _danhSachHangHoaViewModel = new DanhSachHangHoaViewModel();
+                _danhSachHangHoaView = new DanhSachHangHoaView
+                {
+                    DataContext = _danhSachHangHoaViewModel
+                };
+            }
+            CurrentView = _danhSachHangHoaView;
         }
 
     }
