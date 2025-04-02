@@ -1,0 +1,84 @@
+﻿<UserControl x:Class="QuanLyBanHang.Views.DanhSachHangHoaView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:QuanLyBanHang.Views"
+             mc:Ignorable="d"
+             d:DesignHeight="450"
+             d:DesignWidth="800">
+    <Grid>
+        <!-- Gradient Background -->
+        <Grid.Background>
+            <LinearGradientBrush StartPoint="0,0"
+                                 EndPoint="1,1">
+                <GradientStop Color="#E3F2FD"
+                              Offset="0.0" />
+                <GradientStop Color="#BBDEFB"
+                              Offset="1.0" />
+            </LinearGradientBrush>
+        </Grid.Background>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!-- Tiêu đề -->
+        <StackPanel Orientation="Horizontal"
+                    Margin="10">
+            <TextBlock Text="📋 Danh sách hàng hoá"
+                       FontSize="26"
+                       FontWeight="Bold"
+                       Foreground="#0D47A1"
+                       Margin="10,0,0,0" />
+        </StackPanel>
+
+        <!-- DataGrid Container -->
+        <Border Grid.Row="1"
+                Margin="10"
+                Padding="5"
+                Background="White"
+                CornerRadius="10"
+                BorderBrush="#0D47A1"
+                BorderThickness="2">
+            <DataGrid ItemsSource="{Binding ProductList}"
+                      AutoGenerateColumns="False"
+                      SelectedItem="{Binding SelectedProduct}"
+                      IsReadOnly="True"
+                      CanUserAddRows="False"
+                      CanUserDeleteRows="False"
+                      RowBackground="#E3F2FD"
+                      AlternatingRowBackground="#BBDEFB"
+                      GridLinesVisibility="None"
+                      Margin="5">
+
+                <!-- Hiệu ứng Hover -->
+                <DataGrid.RowStyle>
+                    <Style TargetType="DataGridRow">
+                        <Setter Property="Background"
+                                Value="Transparent" />
+                        <Setter Property="ToolTip"
+                                Value="{Binding ProductName}" />
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver"
+                                     Value="True">
+                                <Setter Property="Background"
+                                        Value="#64B5F6" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </DataGrid.RowStyle>
+
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="📌 Mã sản phẩm" Binding="{Binding ProductCode}" Width="100" />
+        <DataGridTextColumn Header="📦 Tên Sản Phẩm" Binding="{Binding ProductName}" Width="200" />
+        <DataGridTextColumn Header="📊 Số Lượng" Binding="{Binding Quantity}" Width="80" />
+        <DataGridTextColumn Header="💰 Giá Nhập" Binding="{Binding ImportPrice}" Width="120" />
+        <DataGridTextColumn Header="📅 Ngày Nhập" Binding="{Binding ImportDate, StringFormat={}{0:dd/MM/yyyy}}" Width="120" />
+        <DataGridTextColumn Header="🏢 Nhà Cung Cấp" Binding="{Binding Supplier}" Width="200" />
+    </DataGrid.Columns>
+            </DataGrid>
+        </Border>
+    </Grid>
+</UserControl>
