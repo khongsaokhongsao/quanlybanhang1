@@ -9,6 +9,7 @@ namespace QuanLyBanHang.Models
     public class Quy
     {
         public int Id { get; set; }
+        public int Bank { get; set; }
         public string Name { get; set; }
         public string Type { get; set; }
         public int Balance { get; set; }

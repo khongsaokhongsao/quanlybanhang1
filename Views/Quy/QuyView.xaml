@@ -28,12 +28,15 @@
                               ItemsSource="{Binding Quys}">
                         <ListView.View>
                             <GridView>
-                                <GridViewColumn Header="Mã Tài Khoản"
+                                <GridViewColumn Header="ID"
                                                 DisplayMemberBinding="{Binding Id}"
+                                                Width="50" />
+                                <GridViewColumn Header="Mã Tài Khoản"
+                                                DisplayMemberBinding="{Binding Bank}"
                                                 Width="100" />
                                 <GridViewColumn Header="Tên Tài Khoản"
                                                 DisplayMemberBinding="{Binding Name}"
-                                                Width="150" />
+                                                Width="100" />
                                 <GridViewColumn Header="Loại Tài Khoản"
                                                 DisplayMemberBinding="{Binding Type}"
                                                 Width="100" />

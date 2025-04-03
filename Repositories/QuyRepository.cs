@@ -27,11 +27,12 @@ namespace QuanLyBanHang.Repositories
                                 var quyItem = new Quy
                                 {
                                     Id = reader.GetInt32(0),
-                                    Name = reader.GetString(1),
-                                    Type = reader.GetString(2),
-                                    Balance=reader.GetInt32(3),
-                                    TotalTransaction = reader.GetInt32(4),
-                                    Status = reader.GetString(5)
+                                    Bank = reader.GetInt32(1),
+                                    Name = reader.GetString(2),
+                                    Type = reader.GetString(3),
+                                    Balance=reader.GetInt32(4),
+                                    TotalTransaction = reader.GetInt32(5),
+                                    Status = reader.GetString(6)
                                 };
                                 quy.Add(quyItem);
                             }

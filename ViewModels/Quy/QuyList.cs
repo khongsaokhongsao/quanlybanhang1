@@ -90,7 +90,7 @@ namespace QuanLyBanHang.ViewModels
                 //SelectedQuy.Validate();
 
                 // Kiểm tra quỹ đã tồn tại hay chưa
-                var existingQuy = Quys.FirstOrDefault(q => q.Name == SelectedQuy.Name && q.Type == SelectedQuy.Type && q.Id != SelectedQuy.Id);
+                var existingQuy = Quys.FirstOrDefault(q => q.Bank == SelectedQuy.Bank &&q.Name == SelectedQuy.Name && q.Type == SelectedQuy.Type && q.Id != SelectedQuy.Id);
                 if (existingQuy != null)
                 {
                     throw new ArgumentException("Tên quỹ đã tồn tại.");
@@ -107,6 +107,7 @@ namespace QuanLyBanHang.ViewModels
                     var quyToUpdate = Quys.FirstOrDefault(q => q.Id == SelectedQuy.Id);
                     if (quyToUpdate != null)
                     {
+                        quyToUpdate.Bank = SelectedQuy.Bank;
                         quyToUpdate.Name = SelectedQuy.Name;
                         quyToUpdate.Type = SelectedQuy.Type;
                         quyToUpdate.TotalTransaction = SelectedQuy.TotalTransaction;

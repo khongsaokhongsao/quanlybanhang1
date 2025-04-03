@@ -225,6 +225,7 @@ namespace QuanLyBanHang.DataAccess
                     string createFundTableQuery = @"
                                         CREATE TABLE Fund (
                                         Id INTEGER PRIMARY KEY AUTOINCREMENT,
+                                        Bank INTEGER NOT NULL,
                                         Name TEXT NOT NULL,
                                         Type TEXT,
                                         Balance INTEGER NOT NULL,
@@ -238,10 +239,9 @@ namespace QuanLyBanHang.DataAccess
                     }
 
                     string insertFundQuery = @"
-                                        INSERT INTO Fund (Name, Type, Balance, TotalTransaction, Status)
-                                        VALUES ('Quỹ từ thiện', 'Từ thiện', 10000, 50, 'Active');
-                                        INSERT INTO Fund (Name, Type, Balance, TotalTransaction, Status)
-                                        VALUES ('Quỹ đầu tư', 'Đầu tư', 500000, 2000, 'Active');
+                                        INSERT INTO Fund (Bank, Name, Type, Balance, TotalTransaction, Status)
+                                        VALUES (123456789,'Nguyễn Văn A', 'Agribank', 10000, 50, 'Active');
+                                        
                                     ";
                     using (var command = new SQLiteCommand(insertFundQuery, connection))
                     {
