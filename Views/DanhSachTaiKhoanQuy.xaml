@@ -1,0 +1,30 @@
+﻿<UserControl x:Class="QuanLyBanHang.Views.Quanlyquy"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:QuanLyBanHang.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid Background="#FFC0CB">
+        <Border Background="#FFEBF2" CornerRadius="20" Padding="15" Margin="20">
+            <StackPanel>
+                <TextBlock Text="Quản lý Tài Khoản Quỹ" FontSize="24" FontWeight="Bold" Foreground="#FF69B4" TextAlignment="Center"/>
+                <Border Background="#FFE4EC" CornerRadius="15" Padding="10" Margin="10">
+                    <ListView x:Name="lvAccounts" Height="250" Background="#FFE4EC" Foreground="#FF1493">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Mã Tài Khoản" DisplayMemberBinding="{Binding AccountId}" Width="100"/>
+                                <GridViewColumn Header="Tên Tài Khoản" DisplayMemberBinding="{Binding Name}" Width="150"/>
+                                <GridViewColumn Header="Loại Tài Khoản" DisplayMemberBinding="{Binding Type}" Width="100"/>
+                                <GridViewColumn Header="Số Dư Hiện Tại" DisplayMemberBinding="{Binding Balance}" Width="120"/>
+                                <GridViewColumn Header="Tổng Thu Chi" DisplayMemberBinding="{Binding TotalTransaction}" Width="120"/>
+                                <GridViewColumn Header="Trạng Thái" DisplayMemberBinding="{Binding Status}" Width="100"/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </Border>
+            </StackPanel>
+        </Border>
+    </Grid>
+</UserControl>
