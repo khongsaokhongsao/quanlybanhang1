@@ -1,0 +1,143 @@
+﻿<UserControl x:Class="QuanLyBanHang.Views.Product.ThemHangHoaView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:QuanLyBanHang.Views.Product"
+             mc:Ignorable="d"
+             d:DesignHeight="450"
+             d:DesignWidth="800">
+    <Grid>
+        <!-- Gradient Background -->
+        <Grid.Background>
+            <LinearGradientBrush StartPoint="0,0"
+                                 EndPoint="1,1">
+                <GradientStop Color="#E3F2FD"
+                              Offset="0.0" />
+                <GradientStop Color="#BBDEFB"
+                              Offset="1.0" />
+            </LinearGradientBrush>
+        </Grid.Background>
+
+        <Border Padding="20"
+                Background="White"
+                CornerRadius="10"
+                BorderBrush="#1E88E5"
+                BorderThickness="2"
+                Margin="20">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <!-- Tiêu đề -->
+                <TextBlock Text="➕ Thêm Hàng Hóa"
+                           FontSize="26"
+                           FontWeight="Bold"
+                           Foreground="#0D47A1"
+                           HorizontalAlignment="Center"
+                           Margin="0,0,0,15"
+                           Grid.Row="0" />
+
+                <ScrollViewer VerticalScrollBarVisibility="Auto"
+                              Grid.Row="1">
+                    <StackPanel Orientation="Vertical"
+                                Margin="10">
+                        <!-- Mã Sản Phẩm -->
+                        <StackPanel Orientation="Vertical"
+                                    Margin="0,5">
+                            <TextBlock Text="📌 Mã sản phẩm:"
+                                       FontWeight="Bold" />
+                            <TextBox Height="30"
+                                     Padding="5"
+                                     BorderBrush="#1E88E5" />
+                        </StackPanel>
+
+                        <!-- Tên Sản Phẩm -->
+                        <StackPanel Orientation="Vertical"
+                                    Margin="0,5">
+                            <TextBlock Text="📦 Tên sản phẩm:"
+                                       FontWeight="Bold" />
+                            <TextBox Height="30"
+                                     Padding="5"
+                                     BorderBrush="#1E88E5" />
+                        </StackPanel>
+
+                        <!-- Số Lượng -->
+                        <StackPanel Orientation="Vertical"
+                                    Margin="0,5">
+                            <TextBlock Text="📊 Số lượng:"
+                                       FontWeight="Bold" />
+                            <TextBox Height="30"
+                                     Padding="5"
+                                     BorderBrush="#1E88E5" />
+                        </StackPanel>
+
+                        <!-- Giá Nhập -->
+                        <StackPanel Orientation="Vertical"
+                                    Margin="0,5">
+                            <TextBlock Text="💰 Giá nhập:"
+                                       FontWeight="Bold" />
+                            <TextBox Height="30"
+                                     Padding="5"
+                                     BorderBrush="#1E88E5" />
+                        </StackPanel>
+
+                        <!-- Ngày Nhập -->
+                        <StackPanel Orientation="Vertical"
+                                    Margin="0,5">
+                            <TextBlock Text="📅 Ngày nhập:"
+                                       FontWeight="Bold" />
+                            <DatePicker BorderBrush="#1E88E5" />
+                        </StackPanel>
+
+                        <!-- Nhà Cung Cấp (Nhập bằng TextBox) -->
+                        <StackPanel Orientation="Vertical"
+                                    Margin="0,5">
+                            <TextBlock Text="🏢 Nhà cung cấp:"
+                                       FontWeight="Bold" />
+                            <TextBox Height="30"
+                                     Padding="5"
+                                     BorderBrush="#1E88E5" />
+                        </StackPanel>
+
+                        <!-- Đơn Vị Tính -->
+                        <StackPanel Orientation="Vertical"
+                                    Margin="0,5">
+                            <TextBlock Text="⚖ Đơn vị tính:"
+                                       FontWeight="Bold" />
+                            <ComboBox BorderBrush="#1E88E5">
+                                <ComboBoxItem Content="Cái" />
+                                <ComboBoxItem Content="Hộp" />
+                                <ComboBoxItem Content="Kg" />
+                                <ComboBoxItem Content="Lít" />
+                                <ComboBoxItem Content="Thùng" />
+                            </ComboBox>
+                        </StackPanel>
+                    </StackPanel>
+                </ScrollViewer>
+
+                <!-- Button Hành Động -->
+                <StackPanel Orientation="Horizontal"
+                            HorizontalAlignment="Center"
+                            Margin="10"
+                            Grid.Row="2">
+                    <Button Content="✔ Lưu"
+                            Width="120"
+                            Background="#00BFFF"
+                            Foreground="White"
+                            Margin="5" />
+                    <Button Content="🔄 Làm mới"
+                            Width="120"
+                            Background="#F4A7B9"
+                            Foreground="White"
+                            Margin="5" />
+                </StackPanel>
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>
+
+

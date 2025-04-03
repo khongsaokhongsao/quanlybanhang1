@@ -14,6 +14,7 @@ using System.Collections.ObjectModel;
 using System.Runtime.ConstrainedExecution;
 using QuanLyBanHang.Views.Kho;
 using QuanLyBanHang.ViewModels.Kho;
+using QuanLyBanHang.Views.Product;
 
 namespace QuanLyBanHang.ViewModels
 {
@@ -58,7 +59,7 @@ namespace QuanLyBanHang.ViewModels
 
         public ICommand ShowKiemKhoCommand { get; set; }
 
-
+        public ICommand ShowThemHangHoaViewCommand { get; set; }
 
 
         public ManufacturerListViewModel ManufacturerListViewModel { get; set; }
@@ -99,12 +100,15 @@ namespace QuanLyBanHang.ViewModels
 
         private DanhSachHangHoaView _danhSachHangHoaView;
         private DanhSachHangHoaViewModel _danhSachHangHoaViewModel;
-     //
+        //
         private KiemKhoView _kiemKhoView;
         private KiemKhoViewModel _kiemKhoViewModel;
 
         private QuyView _danhsachquy;
         private QuyViewModel _danhsachquyViewModel;
+
+        private ThemHangHoaView _themHangHoaView;
+
 
         public MainViewModel()
         {
@@ -162,6 +166,15 @@ namespace QuanLyBanHang.ViewModels
             ShowDanhSachHangHoaViewCommand = new RelayCommand(ShowDanhSachHangHoa);
 
             ShowListQuyCommand = new RelayCommand(ShowQuyList);
+
+            ShowThemHangHoaViewCommand = new RelayCommand(o =>
+            {
+                if (_themHangHoaView == null)
+                {
+                    _themHangHoaView = new ThemHangHoaView();
+                }
+                CurrentView = _themHangHoaView;
+            });
 
             // Mặc định hiển thị Home
             ShowHome(null);
@@ -473,5 +486,13 @@ namespace QuanLyBanHang.ViewModels
             }
             CurrentView = _danhsachquy;
         }
-    }
+        private void ShowThemHangHoa(object obj)
+        {
+            if (_themHangHoaView == null)
+            {
+                _themHangHoaView = new ThemHangHoaView();
+            }
+            CurrentView = _themHangHoaView;
+        }
+    } 
 }
