@@ -11,6 +11,7 @@ using QuanLyBanHang.Views;
 using QuanLyBanHang.Models;
 using QuanLyBanHang.Repositories;
 using System.Collections.ObjectModel;
+using System.Runtime.ConstrainedExecution;
 
 namespace QuanLyBanHang.ViewModels
 {
@@ -51,7 +52,7 @@ namespace QuanLyBanHang.ViewModels
         public ICommand OpenQuanLyChuyenKhoSuDungCommand { get; }
 
         public ICommand ShowDanhSachHangHoaViewCommand { get; set; }
-
+        public ICommand ShowListQuyCommand { get; set; }
 
 
 
@@ -95,7 +96,8 @@ namespace QuanLyBanHang.ViewModels
         private DanhSachHangHoaView _danhSachHangHoaView;
         private DanhSachHangHoaViewModel _danhSachHangHoaViewModel;
 
-
+        private QuyView _danhsachquy;
+        private QuyViewModel _danhsachquyViewModel;
 
         public MainViewModel()
         {
@@ -150,6 +152,7 @@ namespace QuanLyBanHang.ViewModels
 
             ShowDanhSachHangHoaViewCommand = new RelayCommand(ShowDanhSachHangHoa);
 
+            ShowListQuyCommand = new RelayCommand(ShowQuyList);
 
             // Mặc định hiển thị Home
             ShowHome(null);
@@ -439,6 +442,18 @@ namespace QuanLyBanHang.ViewModels
             }
             CurrentView = _danhSachHangHoaView;
         }
+        private void ShowQuyList(object obj)
+        {
+            if (_danhsachquy == null)
+            {
+                _danhsachquyViewModel = new QuyViewModel();
+                _danhsachquy = new QuyView
+                {
+                    DataContext = _danhsachquyViewModel // Gán DataContext
+                };
 
+            }
+            CurrentView = _danhsachquy;
+        }
     }
 }

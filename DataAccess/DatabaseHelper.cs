@@ -206,6 +206,48 @@ namespace QuanLyBanHang.DataAccess
                         command.ExecuteNonQuery();
                     }
                 }
+                // Kiểm tra và tạo bảng Fund
+                string checkFundTableQuery = "SELECT name FROM sqlite_master WHERE type='table' AND name='Fund'";
+                bool FundTableExists = false;
+                using (var command = new SQLiteCommand(checkFundTableQuery, connection))
+                {
+                    using (var reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            FundTableExists = true;
+                        }
+                    }
+                }
+
+                if (!FundTableExists)
+                {
+                    string createFundTableQuery = @"
+                                        CREATE TABLE Fund (
+                                        Id INTEGER PRIMARY KEY AUTOINCREMENT,
+                                        Name TEXT NOT NULL,
+                                        Type TEXT,
+                                        Balance INTEGER NOT NULL,
+                                        TotalTransaction INTEGER NOT NULL,
+                                        Status TEXT NOT NULL
+            
+                                    )";
+                    using (var command = new SQLiteCommand(createFundTableQuery, connection))
+                    {
+                        command.ExecuteNonQuery();
+                    }
+
+                    string insertFundQuery = @"
+                                        INSERT INTO Fund (Name, Type, Balance, TotalTransaction, Status)
+                                        VALUES ('Quỹ từ thiện', 'Từ thiện', 10000, 50, 'Active');
+                                        INSERT INTO Fund (Name, Type, Balance, TotalTransaction, Status)
+                                        VALUES ('Quỹ đầu tư', 'Đầu tư', 500000, 2000, 'Active');
+                                    ";
+                    using (var command = new SQLiteCommand(insertFundQuery, connection))
+                    {
+                        command.ExecuteNonQuery();
+                    }
+                }
             }
 
         }

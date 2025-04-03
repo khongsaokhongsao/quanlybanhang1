@@ -40,8 +40,8 @@ namespace QuanLyBanHang.ViewModels
         }
 
         // Command để thêm, sửa, xóa quỹ
-        public ICommand ShowQuyList { get; set; }
-        //public ICommand AddQuyCommand { get; set; }
+        public ICommand ShowQuyListCommand { get; set; }
+        public ICommand AddQuyCommand { get; set; }
         //public ICommand EditQuyCommand { get; set; }
         //public ICommand DeleteQuyCommand { get; set; }
         public ICommand SaveQuyCommand { get; set; }
@@ -52,8 +52,8 @@ namespace QuanLyBanHang.ViewModels
             Quys = new ObservableCollection<Quy>(_quyRepository.GetAllQuy());
 
             // Khởi tạo các command
-            ShowQuyList = new RelayCommand(ShowQuyListView);
-            //AddQuyCommand = new RelayCommand(AddQuy);
+            ShowQuyListCommand = new RelayCommand(ShowQuyListView);
+            AddQuyCommand = new RelayCommand(AddQuy);
             SaveQuyCommand = new RelayCommand(SaveQuy);
 
             // Mặc định hiển thị danh sách quỹ
@@ -63,24 +63,24 @@ namespace QuanLyBanHang.ViewModels
         public void ShowQuyListView(object obj)
         {
             LoadQuys();
-            var quyListView = new QuyView
+            //var quyListView = new QuyView
+            //{
+            //    DataContext = this
+            //};
+            //CurrentView = quyListView;
+        }
+
+        public void AddQuy(object obj)
+        {
+            SelectedQuy = new Quy();
+            var quyFormView = new QuyFormView
             {
                 DataContext = this
             };
-            CurrentView = quyListView;
+            CurrentView = quyFormView;
         }
 
-        //public void AddQuy(object obj)
-        //{
-        //    SelectedQuy = new Quy();
-        //    var quyFormView = new QuyFormView
-        //    {
-        //        DataContext = this
-        //    };
-        //    CurrentView = quyFormView;
-        //}
 
-        
 
         private void SaveQuy(object obj)
         {
@@ -96,11 +96,11 @@ namespace QuanLyBanHang.ViewModels
                     throw new ArgumentException("Tên quỹ đã tồn tại.");
                 }
 
-                //if (SelectedQuy.Id == 0) // Thêm quỹ mới
-                //{
-                //    _quyRepository.AddQuy(SelectedQuy);
-                //    Quys.Add(SelectedQuy);
-                //}
+                if (SelectedQuy.Id == 0) // Thêm quỹ mới
+                {
+                    //_quyRepository.AddQuy(SelectedQuy);
+                    Quys.Add(SelectedQuy);
+                }
                 else // Cập nhật quỹ
                 {
                     //_quyRepository.UpdateQuy(SelectedQuy);

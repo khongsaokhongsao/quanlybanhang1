@@ -1,5 +1,4 @@
-﻿using QuanLyBanHang.ViewModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,14 +16,13 @@ using System.Windows.Shapes;
 namespace QuanLyBanHang.Views
 {
     /// <summary>
-    /// Interaction logic for QuyView.xaml
+    /// Interaction logic for QuyFormView.xaml
     /// </summary>
-    public partial class QuyView : UserControl
+    public partial class QuyFormView : UserControl
     {
-        public QuyView()
+        public QuyFormView()
         {
             InitializeComponent();
-            //this.DataContext = new QuyViewModel();
         }
     }
 }

@@ -3,9 +3,6 @@ using QuanLyBanHang.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.SQLite;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace QuanLyBanHang.Repositories
 {
@@ -20,7 +17,7 @@ namespace QuanLyBanHang.Repositories
                 using (var connection = DatabaseHelper.GetConnection())
                 {
                     connection.Open();
-                    string query = "SELECT * FROM Products";
+                    string query = "SELECT * FROM Fund";
                     using (var command = new SQLiteCommand(query, connection))
                     {
                         using (var reader = command.ExecuteReader())
@@ -33,10 +30,10 @@ namespace QuanLyBanHang.Repositories
                                     Name = reader.GetString(1),
                                     Type = reader.GetString(2),
                                     Balance=reader.GetInt32(3),
-                                    TotalTransaction = reader.GetDouble(4),
+                                    TotalTransaction = reader.GetInt32(4),
                                     Status = reader.GetString(5)
                                 };
-                                //Quy.Add(quy);
+                                quy.Add(quyItem);
                             }
                         }
                     }

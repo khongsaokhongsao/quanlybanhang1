@@ -3,11 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:QuanLyBanHang.Views.Quy"
+             xmlns:local="clr-namespace:QuanLyBanHang.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid Background="#FFC0CB">
-        <Border Background="#FFEBF2"
+    <Grid Background="#90CAF9">
+        <Border Background="#E3F2FD"
                 CornerRadius="20"
                 Padding="15"
                 Margin="20">
@@ -15,20 +15,21 @@
                 <TextBlock Text="Quản lý Tài Khoản Quỹ"
                            FontSize="24"
                            FontWeight="Bold"
-                           Foreground="#FF69B4"
+                           Foreground="#0D47A1"
                            TextAlignment="Center" />
-                <Border Background="#FFE4EC"
+                <Border Background="#90CAF9"
                         CornerRadius="15"
                         Padding="10"
                         Margin="10">
                     <ListView x:Name="lvAccounts"
                               Height="250"
-                              Background="#FFE4EC"
-                              Foreground="#FF1493">
+                              Background="#E3F2FD"
+                              Foreground="Black"
+                              ItemsSource="{Binding Quys}">
                         <ListView.View>
                             <GridView>
                                 <GridViewColumn Header="Mã Tài Khoản"
-                                                DisplayMemberBinding="{Binding AccountId}"
+                                                DisplayMemberBinding="{Binding Id}"
                                                 Width="100" />
                                 <GridViewColumn Header="Tên Tài Khoản"
                                                 DisplayMemberBinding="{Binding Name}"
