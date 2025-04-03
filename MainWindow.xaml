@@ -168,7 +168,8 @@
                                 Command="{Binding ShowDanhmuctaothanhsanphamCommand}" />
                         <Button Content="📊Tồn kho" Style="{StaticResource MenuButtonStyle}" FontSize="14"
                                 Command="{Binding ShowTonKhoCommand}"/>
-                        <Button Content="✅📦Kiểm kho" Style="{StaticResource MenuButtonStyle}" FontSize="14"/>
+                        <Button Content="✅📦Kiểm kho" Style="{StaticResource MenuButtonStyle}" FontSize="14"
+                                Command="{Binding ShowKiemKhoCommand}"/>
                         <Button Content="🔁Chuyển kho" Style="{StaticResource MenuButtonStyle}" FontSize="14"/>
                         <Button Content="🔧📦Chuyển kho bảo hành" Style="{StaticResource MenuButtonStyle}" FontSize="14"/>
                         <Button Content="🛠️📦Chuyển kho sử dụng" Style="{StaticResource MenuButtonStyle}" FontSize="14"/>

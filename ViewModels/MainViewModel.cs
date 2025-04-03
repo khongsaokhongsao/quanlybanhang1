@@ -12,6 +12,8 @@ using QuanLyBanHang.Models;
 using QuanLyBanHang.Repositories;
 using System.Collections.ObjectModel;
 using System.Runtime.ConstrainedExecution;
+using QuanLyBanHang.Views.Kho;
+using QuanLyBanHang.ViewModels.Kho;
 
 namespace QuanLyBanHang.ViewModels
 {
@@ -54,6 +56,8 @@ namespace QuanLyBanHang.ViewModels
         public ICommand ShowDanhSachHangHoaViewCommand { get; set; }
         public ICommand ShowListQuyCommand { get; set; }
 
+        public ICommand ShowKiemKhoCommand { get; set; }
+
 
 
 
@@ -95,6 +99,9 @@ namespace QuanLyBanHang.ViewModels
 
         private DanhSachHangHoaView _danhSachHangHoaView;
         private DanhSachHangHoaViewModel _danhSachHangHoaViewModel;
+     //
+        private KiemKhoView _kiemKhoView;
+        private KiemKhoViewModel _kiemKhoViewModel;
 
         private QuyView _danhsachquy;
         private QuyViewModel _danhsachquyViewModel;
@@ -149,6 +156,8 @@ namespace QuanLyBanHang.ViewModels
             OpenQuanLyChuyenKhoBanCommand = new RelayCommand(o => OpenQuanLyChuyenKhoBan());
             OpenQuanLyChuyenKhoHuyCommand = new RelayCommand(o => OpenQuanLyChuyenKhoHuy());
             OpenQuanLyChuyenKhoSuDungCommand = new RelayCommand(o => OpenQuanLyChuyenKhoSuDung());
+            /////////////////////////////
+            ShowKiemKhoCommand = new RelayCommand(o => ShowKiemKho());
 
             ShowDanhSachHangHoaViewCommand = new RelayCommand(ShowDanhSachHangHoa);
 
@@ -207,6 +216,15 @@ namespace QuanLyBanHang.ViewModels
                 _tonKhoBHView = new TonKhoBHView { DataContext = _tonKhoBHViewModel };
             }
             CurrentView = _tonKhoBHView;
+        }
+        private void ShowKiemKho()
+        {
+            if (_kiemKhoView == null)
+            {
+                _kiemKhoViewModel = new KiemKhoViewModel();
+                _kiemKhoView = new KiemKhoView { DataContext = _kiemKhoViewModel };
+            }
+            CurrentView = _kiemKhoView;
         }
         private void OpenDanhSachGuiBH()
         {
