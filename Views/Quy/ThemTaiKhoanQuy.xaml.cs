@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace QuanLyBanHang.Views.Quy
+namespace QuanLyBanHang.Views
 {
     /// <summary>
     /// Interaction logic for ThemTaiKhoanQuy.xaml

@@ -7,6 +7,7 @@ using QuanLyBanHang.Repositories;
 using QuanLyBanHang.Helpers;
 using QuanLyBanHang.Views;
 using System.ComponentModel;
+using QuanLyBanHang.Views.Quy;
 
 
 
@@ -63,21 +64,11 @@ namespace QuanLyBanHang.ViewModels
         public void ShowQuyListView(object obj)
         {
             LoadQuys();
-            //var quyListView = new QuyView
-            //{
-            //    DataContext = this
-            //};
-            //CurrentView = quyListView;
         }
 
         public void AddQuy(object obj)
         {
             SelectedQuy = new Quy();
-            var quyFormView = new QuyFormView
-            {
-                DataContext = this
-            };
-            CurrentView = quyFormView;
         }
 
 
@@ -90,7 +81,7 @@ namespace QuanLyBanHang.ViewModels
                 //SelectedQuy.Validate();
 
                 // Kiểm tra quỹ đã tồn tại hay chưa
-                var existingQuy = Quys.FirstOrDefault(q => q.Bank == SelectedQuy.Bank &&q.Name == SelectedQuy.Name && q.Type == SelectedQuy.Type && q.Id != SelectedQuy.Id);
+                var existingQuy = Quys.FirstOrDefault(q => q.Bank == SelectedQuy.Bank && q.Name == SelectedQuy.Name && q.Type == SelectedQuy.Type && q.Id != SelectedQuy.Id);
                 if (existingQuy != null)
                 {
                     throw new ArgumentException("Tên quỹ đã tồn tại.");
@@ -98,7 +89,7 @@ namespace QuanLyBanHang.ViewModels
 
                 if (SelectedQuy.Id == 0) // Thêm quỹ mới
                 {
-                    //_quyRepository.AddQuy(SelectedQuy);
+                    _quyRepository.AddQuy(SelectedQuy);
                     Quys.Add(SelectedQuy);
                 }
                 else // Cập nhật quỹ

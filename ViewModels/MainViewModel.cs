@@ -56,6 +56,7 @@ namespace QuanLyBanHang.ViewModels
 
         public ICommand ShowDanhSachHangHoaViewCommand { get; set; }
         public ICommand ShowListQuyCommand { get; set; }
+        public ICommand AddQuyCommand { get; set; }
 
         public ICommand ShowKiemKhoCommand { get; set; }
 
@@ -106,6 +107,9 @@ namespace QuanLyBanHang.ViewModels
 
         private QuyView _danhsachquy;
         private QuyViewModel _danhsachquyViewModel;
+        //private ThemTaiKhoanQuy _addtkquy;
+
+       
 
         private ThemHangHoaView _themHangHoaView;
 
@@ -166,6 +170,7 @@ namespace QuanLyBanHang.ViewModels
             ShowDanhSachHangHoaViewCommand = new RelayCommand(ShowDanhSachHangHoa);
 
             ShowListQuyCommand = new RelayCommand(ShowQuyList);
+            AddQuyCommand = new RelayCommand(AddQuy);
 
             ShowThemHangHoaViewCommand = new RelayCommand(o =>
             {
@@ -485,6 +490,20 @@ namespace QuanLyBanHang.ViewModels
 
             }
             CurrentView = _danhsachquy;
+        }
+
+        private void AddQuy(object obj)
+        {
+            if (_danhsachquyViewModel == null)
+            {
+                _danhsachquyViewModel = new QuyViewModel();
+                _danhsachquy = new QuyView
+                {
+                    DataContext = _danhsachquyViewModel
+                };
+            }
+            _danhsachquyViewModel.AddQuy(null);
+            CurrentView = new ThemTaiKhoanQuy { DataContext = _danhsachquyViewModel };
         }
         private void ShowThemHangHoa(object obj)
         {
